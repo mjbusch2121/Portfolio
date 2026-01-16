@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<!--HEAD-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <title>Michael Busch's Portfolio</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Rubik&display=swap" rel="stylesheet">
+</head>
+
+<!--BODY-->
+
+<body class="background">
+    <!--NAVBAR-->
+    <nav class="navbar">
+        <a class="active" href="#home">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#github">GITHUB</a>
+        <a href="#contact">CONTACT</a>
+    </nav>
+
+    <!--BACKGROUND VIDEO-->
+    <header id="home">
+        <video autoplay muted loop id="blueberry_video" aria-hidden="true">
+            <source src="images/video/blueberry.mp4" alt="fresh_blueberries">
+            <!--DISPLAY MESSAGE IF VIDEO FAILS TO RUN-->
+            Your browser does not support HTML5 video.
+        </video>
+
+        <!--VIDEO TEXT-->
+        <div class="video_text">
+            <h1 class="white-text">Michael Busch's Portfolio</h1>
+            <p class="center">
+                <q>Fall seven times, stand up eight</q>
+                <br>-Japanese Proverb
+                <br>
+                <br>
+                <q>Success is not final, failure is not fatal: It is the courage to continue that counts</q>
+                <br>-Winston Churchill
+                <br>
+                <br>My name is Michael Busch. Welcome to my portfolio website! On this page, I will tell you about
+                my background and experience.
+                <br>
+                <br>Thank you for stopping by!
+            </p>
+        </div>
+    </header>
+
+    <!--ABOUT SECTION-->
+    <main>
+        <section class="row" id="about">
+            <!--LEFT COLUMN-->
+            <div class="column_2">
+                <img src="images/Market Baskets.jpeg" alt="produce market display">
+            </div>
+            <!--RIGHT COLUMN-->
+            <div class="column_1">
+                <h1>About</h1>
+                <p>I am an aspiring programmer and data analyst with a strong background in retail and wholesale produce. I am now building the technical skills to uncover insights, improve operations, and support smarter decision‑making across the agriculture industry. My goal is to combine hands‑on experience with data‑driven problem‑solving to help create more efficient and resilient food systems.
+                </p>
+                <br>
+                <p>In my free time, I enjoy running, golfing, travel and photography.
+                </p>
+                <br>
+                <p>I look forward to connecting with you!
+                </p>
+            </div>
+        </section>
+
+        <!--GITHUB SECTION-->
+        <section class="row" id="github">
+            <!--LEFT COLUMN-->
+            <div class="column_1">
+                <h1>GitHub</h1>
+                <p>You can view my coding projects on my GitHub profile here:</p>
+                <p class="center">
+                    <a href="https://github.com/mjbusch2121" target="_blank">Michael Busch's GitHub</a>
+                </p>
+            </div>
+            <!--RIGHT COLUMN-->
+            <div class="column_2">
+                <a href="https://github.com/mjbusch2121" target="_blank"><img src="images/git_hub.jpg" alt="Git Hub"></a>
+            </div>
+        </section>
+
+        <!--CONTACT SECTION-->
+        <section class="row" id="contact">
+            <!--CONTACT IMAGE, LEFT COLUMN-->
+            <div class="column_2 column_tall">
+                <img src="images/mail_notification.jpg" alt="mail_notification">
+            </div>
+            <!--CONTACT FORM, RIGHT COLUMN-->
+            <div class="column_1 column_tall">
+                <h1>Contact</h1>
+                <!--THIS SPECIFIES WHERE AND HOW TO SEND THE FORM DATA; WE ARE LEAVING IT BLANK-->
+                <form action="https://formspree.io/f/mvzzpdej" method="POST">
+                    <!--HERE WE ARE UTILIZING A 3RD PARTY SERVICE TO SUBMIT THE FORM DATA, INSERT YOUR FORMSPREE ENDPOINT IN THE ACTION ATTRIBUTE-->
+                    <label for="name">Name:</label>
+                    <input type="text" id="name"placeholder=" Please enter your name here">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="Email" placeholder="Please enter your email here">
+                    <label for="message">Message:</label>
+                    <input type="text" id="message" name="Message" placeholder="Please write your message here">
+                    <input type="submit" value="SUBMIT">
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!--FOOTER SECTION-->
+    <footer>
+        <p>&copy; Michael Busch 2026</p>
+    </footer>
+</body>
+
+</html>
