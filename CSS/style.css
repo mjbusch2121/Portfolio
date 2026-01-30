@@ -1,0 +1,656 @@
+/*GENERAL STYLING*/
+
+/*BODY STYLING*/
+body {
+  margin: 0; /*This ensures our site displays all the way to the edge of the browser screen*/
+  background-color: #f5fbef;
+}
+
+/* Heading 1 elements */
+h1 {
+  text-transform: uppercase; /* Capitalizing all h1 headings */
+  font-family:
+    "Lato", sans-serif; /*sets font for all H1 headings, font imported from fonts.google.com*/
+  text-align: center; /* Centering all h1 elements */
+  margin-top: 2rem; /* Adds a small margin above h1 elements */
+  color: black;
+  font-size: calc(
+    1.2rem + 1.5vw
+  ); /* Scales from ~31px on desktop to ~23px on mobile. */
+}
+
+/* Heading 1 element hover effect */
+h1:hover {
+  transform: scale(
+    1.03
+  ); /* When the h1 elements are hovered over they increase in size by 1.1 */
+  transition: transform 0.3s ease; /* This causes the transformation to last 1 second */
+}
+
+/* Styling for portfolio title text */
+.white-text {
+  color: #fff; /* This is used to change the color of the portfolio title text */
+  font-size: min(
+    calc(1.5rem + 2vw),
+    4rem
+  ); /* Prevents title from getting too huge on large screens */
+}
+
+/* Paragraph elements */
+p {
+  font-family: "Rubik", sans-serif; /*Rubik from fonts.google.com*/
+  text-align: left; /* Justify text within paragraph elements */
+  letter-spacing: 0.5px; /* This expands the text slightly */
+  font-size: 1.1rem;
+  margin: 0 0 1rem 0;
+  padding: 0 1rem;
+}
+
+/* Center class - this applies to all elements with the class "center" */
+.center {
+  text-align: center; /* This center aligns the text */
+  margin-bottom: 1.5rem;
+}
+
+/* Anchor elements */
+a {
+  color: black; /* This ensures all links are colored */
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Quotation elements */
+q {
+  font-style: italic;
+}
+
+/* Image elements */
+img {
+  border-radius: 8px; /* Gives all images slightly rounded corners */
+  max-width: 100%; /* Ensures all images stay within the width of their container */
+  height: auto; /* Sets the height of all images */
+  display: block; /* By specifying block display we can ensure our images are able to be centered */
+  margin: 0 auto;
+  margin-top: 0;
+}
+
+/* Image element hover effects */
+img:hover {
+  filter: grayscale(0%);
+  transition: transform 0.3s ease;
+  transform: scale(1.03);
+}
+
+/* The @media rule is used in media queries to apply different styles for different media/types of devices */
+/* On screens 576px and smaller the images will be 100px tall and centered vertically in the column */
+@media screen and (max-width: 576px) {
+  img {
+    height: auto;
+    margin-top: 1rem;
+  }
+}
+
+/* Styling for footer element */
+footer {
+  padding: 1.5rem 0; /* This gives the footer padding that is equal to 2% of the width of the element's area */
+  background-color: #c3d9c4;
+  text-align: center;
+}
+footer p {
+  margin: 0;
+  text-align: center;
+}
+
+/* FADE ANIMATION */
+/* DEFINE THE FADE-IN ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start invisible */
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1; /* End fully visible */
+    transform: translateY(0); /* End at normal position */
+  }
+}
+
+/* Stagger the sections with delays */
+#about {
+  animation-delay: 0.2s; /* About section fades in first */
+}
+
+#projects {
+  animation-delay: 0.4s; /* Section fades in second */
+}
+
+#contact {
+  animation-delay: 0.6s; /* Section fades in last */
+}
+/***** END OF GENERAL STYLING *****/
+
+/***** NAVBAR STYLING *****/
+.navbar {
+  display: flex;
+  background-color: #c3d9c4;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  padding: 0.5rem;
+  animation: fadeIn 0.8s ease-out; /* Navbar fades in quickly*/
+}
+
+/* Navbar links */
+.navbar a {
+  color: white; /* This is the font color for text on our navbar */
+  padding: 0.75rem 1rem; /* This adds padding around our text */
+  text-decoration: none; /* This gets rid of the underlines under the text on our navbar */
+  font-family:
+    "Lato", sans-serif; /* This specifies the font family for text on our navbar */
+  font-size: 1rem; /* This specifies the font size for text on our navbar */
+  text-align: center; /* This centers the text within its container */
+}
+
+/* Screens 576px and smaller will display navbar links equally distributed */
+@media screen and (max-width: 576px) {
+  .navbar a {
+    width: 25%; /* This makes each link take up 1/4 of the navbar */
+    font-size: 0.75rem;
+  }
+}
+
+/* Navbar hover effects */
+.navbar a:hover {
+  background-color: #c3d9c4; /* Defines the background color that will display when you hover over the link */
+  color: black; /* This defines the font color that will display when navbar a elements are hovered over */
+}
+/***** END OF NAVBAR STYLING *****/
+
+/***** VIDEO STYLING *****/
+/*Formatting for background video*/
+
+#home {
+  position: relative;
+  height: 450px;
+  overflow: hidden;
+  margin-top: 3rem; /* creates space below navbar so video doesn't start behind it */
+}
+
+/* Make video section responsive on tablets and smaller */
+@media screen and (max-width: 768px) {
+  #home {
+    height: 350px; /* smaller on tablets */
+    margin-top: 2.5rem; /* Less top margin on smaller screens */
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #home {
+    height: 250px;
+    margin-top: 2rem;
+  }
+}
+
+#blueberry_video {
+  position: absolute; /* This fixes the video to the page */
+  top: 0;
+  left: 0;
+  right: 0; /* This ensures there is no space between the edge of the video and the edge of the page */
+  bottom: 0; /* This ensures no space between the bottom of the video and the bottom of the page */
+  min-width: 100%; /* This ensures the video is displayed across the full width of the page */
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1; /* This places the video behind the other elements on the page */
+}
+
+/* Screens that are 576px and smaller will not display the background video */
+@media screen and (max-width: 576px) {
+  #blueberry_video {
+    display: none;
+  }
+}
+
+/* Texts over the video */
+.video_text {
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  width: 100%;
+  padding: 1.5rem 1rem;
+  position: absolute;
+  top: 0; /* starts at the top */
+  bottom: 0; /* stretches to the bottom */
+  display: flex; /* helps with centering content */
+  flex-direction: column; /* stacks content vertically */
+  justify-content: center; /* centers content vertically */
+  animation: fadeIn 1.2s ease-out; /* Smooth entrance for the hero text */
+}
+
+/***** END OF VIDEO STYLING *****/
+
+/***** TABLE STYLING -  this section covers the styling of the columns and rows within the table *****/
+* {
+  /* The asterisk is a universal selector that applies this effect to all elements on the page */
+  box-sizing: border-box; /* This creates a box with a border within which we will place most of our text */
+}
+
+/* This inserts something after the content of selected elements (in this case the elements with class "row") */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  animation: fadeIn 1s ease-out; /* ADD THIS */
+  animation-fill-mode: both; /* ADD THIS - keeps the final state */
+}
+.column_1,
+.column_2 {
+  width: 50%; /* This ensures the column takes up half of the page width */
+  padding: 1rem;
+  min-height: 250px;
+}
+.column_1 {
+  background-color: #c3d9c4;
+}
+
+.column_2 {
+  background-color: #4f6d7a;
+}
+
+#projects .column_1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+#projects .column_2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#projects a {
+  font-weight: bold;
+  color: #000;
+  text-decoration: underline;
+}
+
+#projects a:hover {
+  color: #333;
+}
+/* SLIDESHOW STYLING */
+/* Container for the slideshow */
+.slideshow-container {
+  position: relative; /* Allows slides to stack on top of each other */
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Hides slides that are sliding out of view */
+}
+
+/* Individual slide styling */
+.slide {
+  position: absolute; /* Stacks all slides in the same position */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* Starts invisible */
+  transform: translateX(100%); /* Starts off-screen to the right */
+  transition: transform 1s ease, opacity 1s ease; /* 1-second slide and fade transition */
+}
+
+/* Active slide (the one currently showing) */
+.slide.active {
+  opacity: 1; /* Fully visible */
+  transform: translateX(0); /* Centered in view */
+  z-index: 2; /* Appears above other slides */
+}
+
+/* Images inside slides */
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures images fill the container while maintaining aspect ratio */
+  object-position: center; /* Centers the image within the crop */
+}
+
+#about .column_1 {
+  text-align: center; /* centers all text inside this column */
+}
+
+#about .column_1 p {
+  padding: 0 1rem; /* optional: keeps your readable side‑padding */
+  text-align: center;
+}
+
+/* This class is applied to the columns in the final row, overriding the height and padding to provide more room for the contact form  while keeping the rest of the formatting from Column_1 or Column_2 */
+.column_tall {
+  padding-top: 0%;
+}
+
+#contact .column_2 {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 1.5rem;
+}
+
+#contact .column_1 {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 1.5rem;
+}
+
+/* Remove top margin from h1 in contact section for better alignment */
+#contact h1 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* Screens 576px and smaller will display a scroll bar if the text overflows the column height */
+@media screen and (max-width: 576px) {
+  .column_1,
+  .column_2 {
+    width: 100%;
+  }
+}
+
+/***** END OF TABLE STYLING *****/
+
+/***** CONTACT FORM STYLING *****/
+/* input[type=text] targets all text input sections of the contact form */
+input[type="text"] {
+  width: 100%; /* Each input box covers the full width of the container */
+  padding: 12px; /* Adds padding within the text box */
+  border: 1px solid #ccc; /* Setting a solid border and its color */
+  border-radius: 4px; /* Slightly rounds the corners of the text box border */
+  box-sizing: border-box; /* This creates a box with a border around the contact form input boxes */
+  margin-top: 6px; /* Adds a margin to the top of the text box */
+  margin-bottom: 16px; /* Adds a margin to the bottom of the text box */
+  resize: vertical; /* This allows the user to resize the text boxes vertically */
+  font-family: "Rubik", sans-serif;
+}
+
+/* Hover effects for input boxes */
+input[type="text"]:hover {
+  box-shadow: 0 0 5px #00004d inset; /* This creates a blue shadow in the text box when hovered over by the user */
+}
+
+/* Submit button */
+input[type="submit"] {
+  background-color: black; /* Sets the background color of the submit button to black */
+  color: white; /* Sets the font color of the Submit button to white */
+  font-weight: bold; /* Makes the font of the submit button bold */
+  padding: 12px 20px; /* Adds padding to the submit button */
+  border: none; /* Removes the border from the submit button */
+  border-radius: 4px; /* Gives the submit button the same rounded corners as the text boxes */
+  cursor: pointer; /* Changes the cursor to pointer when over the submit button */
+  display: block; /* Allows the submit button to be centered */
+  margin-left: auto; /* In combination with "margin-right: auto" this will center the submit button */
+  margin-right: auto;
+  font-family: "Lato", sans-serif;
+  margin-bottom: 1rem;
+}
+
+/* Hover effect for submit button */
+input[type="submit"]:hover {
+  background-color: #c3d9c4; /* Turns the background of the submit button white when the user hovers over it */
+  color: black; /* Turns the font black when hovered over */
+  transform: scale(1.05); /* Makes the button increase 1.5 times in size */
+  transition: transform 0.3s ease; /* Makes the transform effect last 1.5 seconds */
+}
+
+/* Form element */
+form {
+  border-radius: 5px; /* Rounds the corners of the contact form */
+  background-color: #f2f2f2;
+  padding: 2rem; /* Adds padding to the contact form */
+  font-family: "Lato", sans-serif;
+}
+/* PHONE FORM STYLING */
+.phone-form-container {
+  margin-bottom: 2rem; /* space between phone form and main form */
+}
+/* Heading for phone form */
+.phone-form-container h3 {
+  font-family: "Lato", sans-serif;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+/* Style the phone form */
+#phoneForm {
+  border-radius: 5px;
+  background-color: #f9f9f9; /* Slightly different color than main form */
+  padding: 1.5rem;
+  font-family: "Lato", sans-serif;
+  border: 2px solid #c3d9c4; /* Adds a subtle border to distinguish it */
+}
+
+/* Phone number input field */
+input[type="tel"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  font-family: "Rubik", sans-serif;
+  font-size: 1rem;
+}
+/* Hover effect for phone input */
+input[type="tel"]:hover {
+  box-shadow: 0 0 5px #00004d inset;
+}
+
+/* Style the select dropdown */
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  font-family: "Rubik", sans-serif;
+  font-size: 1rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+/* Hover effect for dropdown */
+select:hover {
+  box-shadow: 0 0 5px #00004d inset;
+}
+/* Style for form divider between the two forms */
+.form-divider {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+  gap: 1rem;
+}
+
+.form-divider hr {
+  flex: 1; /* Makes the lines stretch to fill available space */
+  border: none;
+  border-top: 2px solid #ccc;
+}
+
+.form-divider p {
+  margin: 0;
+  padding: 0 0.5rem;
+  color: #666;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+/***** END OF CONTACT FORM STYLING *****/
+
+section.row {
+  margin-bottom: 2rem;
+}
+/***** POPUP MODAL STYLING *****/
+/* Floating trigger button - appears in bottom right corner */
+.popup-trigger-btn {
+  position: fixed; /* Stays in place when scrolling */
+  bottom: 2rem; /* 2rem from bottom of screen */
+  right: 2rem; /* 2rem from right of screen */
+  background-color: #4f6d7a; /* Matches your column_2 color */
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 50px; /* Rounded pill shape */
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  z-index: 999; /* Appears above most content */
+}
+
+/* Floating button hover effect */
+.popup-trigger-btn:hover {
+  background-color: #c3d9c4; /* Changes to your accent color */
+  color: black;
+  transform: scale(1.05); /* Slight grow on hover */
+}
+
+/* Modal container - hidden by default */
+.modal {
+  display: none; /* Hidden until opened */
+  position: fixed;
+  z-index: 1000; /* Above everything including floating button */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  animation: fadeIn 0.3s ease-out; /* Uses your existing fadeIn animation */
+}
+
+/* Dark overlay background behind modal */
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+  cursor: pointer; /* Shows user can click to close */
+}
+
+/* Modal content box - the white popup */
+.modal-content {
+  position: relative; /* Positioned above the overlay */
+  background-color: #f5fbef; /* Matches your body background */
+  margin: 5% auto; /* Centered horizontally, 5% from top */
+  padding: 2rem;
+  border: 3px solid #c3d9c4; /* Border in your accent color */
+  border-radius: 8px; /* Rounded corners like your images */
+  width: 90%;
+  max-width: 500px; /* Max width on larger screens */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+  animation: slideDown 0.3s ease-out; /* Smooth entrance animation */
+}
+
+/* Slide down animation for modal appearance */
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px); /* Starts 50px higher */
+    opacity: 0; /* Starts invisible */
+  }
+  to {
+    transform: translateY(0); /* Ends at normal position */
+    opacity: 1; /* Fully visible */
+  }
+}
+
+/* Close button (X) in top right */
+.close-btn {
+  color: #666;
+  float: right; /* Positioned in top right */
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #000; /* Darkens on hover */
+}
+
+/* Modal heading */
+.modal-content h2 {
+  font-family: "Lato", sans-serif;
+  color: #333;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase; /* Matches your h1 style */
+}
+
+/* Popup form styling - matches your existing forms */
+#popupForm {
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 1.5rem;
+  font-family: "Lato", sans-serif;
+}
+
+/* Textarea for message field - new element type */
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  font-family: "Rubik", sans-serif;
+  font-size: 1rem;
+  resize: vertical; /* User can resize vertically only */
+}
+
+textarea:hover {
+  box-shadow: 0 0 5px #00004d inset; /* Matches your input hover effect */
+}
+
+/* Email input field styling */
+input[type="email"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  font-family: "Rubik", sans-serif;
+  font-size: 1rem;
+}
+
+input[type="email"]:hover {
+  box-shadow: 0 0 5px #00004d inset;
+}
+
+/* Mobile responsive adjustments */
+@media screen and (max-width: 576px) {
+  .modal-content {
+    width: 95%; /* Wider on mobile */
+    margin: 10% auto; /* More margin from top on mobile */
+    padding: 1.5rem;
+  }
+  
+  .popup-trigger-btn {
+    bottom: 1rem; /* Closer to bottom on mobile */
+    right: 1rem; /* Closer to right on mobile */
+    padding: 0.75rem 1.25rem; /* Slightly smaller padding */
+    font-size: 0.9rem; /* Slightly smaller text */
+  }
+}
