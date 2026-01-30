@@ -5,7 +5,7 @@ This site showcases my journey through the Tech Academy bootcamp, featuring hand
 It’s built to demonstrate my growth, creativity, and technical skills to instructors, recruiters, and collaborators.
 
 ## Overview
-- **Built with**: HTML5, CSS3, Git, GitHub
+- **Built with**: HTML5, CSS3, JavaScript, GitHub
 - **Focus areas**: Semantic structure, responsive design, accessibility, and clean layout
 - **Sections include**:
   - 🎥 Hero video and intro text
@@ -13,6 +13,6 @@ It’s built to demonstrate my growth, creativity, and technical skills to instr
   - 💻 GitHub Projects Link
   - 📬 Contact Form
 
-## Live Site
 
-## File Structure
+
+
