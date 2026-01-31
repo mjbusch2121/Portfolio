@@ -1,116 +1,16 @@
 <!doctype html>
-<html>
+<html lang="en">
   <!--HEAD-->
 
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Michael Busch's Portfolio</title>
     <link rel="stylesheet" type="text/css" href="CSS/style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Lato&family=Rubik&display=swap"
       rel="stylesheet"
     />
-    <!--JavaScript Form Validation-->
-    <script>
-      // Function to validate the phone callback form
-      function validatePhoneForm() {
-        // Get the values from each form field
-        var name = document.getElementById("phone-name").value;
-        var phone = document.getElementById("phone-number").value;
-        var callTime = document.getElementById("call-time").value;
-
-        // Check if name field is empty
-        if (name === "" || name === null) {
-          alert("Please enter your name before submitting.");
-          return false; // Prevents form submission
-        }
-
-        // Check if phone number field is empty
-        if (phone === "" || phone === null) {
-          alert("Please enter your phone number before submitting.");
-          return false; // Prevents form submission
-        }
-
-        // Check if a call time was selected
-        if (callTime === "" || callTime === null) {
-          alert("Please select your preferred call time before submitting.");
-          return false; // Prevents form submission
-        }
-
-        // If all fields are filled, show success message
-        alert(
-          "Thank you! We'll call you back during your preferred time: " +
-            callTime,
-        );
-        return true; // Allows form submission
-      }
-      // POPUP MODAL FUNCTIONS
-
-      // Function to open the modal
-      function openModal() {
-        document.getElementById("popupModal").style.display = "block";
-        document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
-      }
-
-      // Function to close the modal
-      function closeModal() {
-        document.getElementById("popupModal").style.display = "none";
-        document.body.style.overflow = "auto"; // Restore scrolling
-      }
-
-      // Function to handle popup form submission with validation
-      function handlePopupSubmit() {
-        var name = document.getElementById("popup-name").value;
-        var email = document.getElementById("popup-email").value;
-        var message = document.getElementById("popup-message").value;
-
-        // Validate name field
-        if (name === "" || name === null) {
-          alert("Please enter your name.");
-          return false;
-        }
-
-        // Validate email field
-        if (email === "" || email === null) {
-          alert("Please enter your email.");
-          return false;
-        }
-
-        // Validate message field
-        if (message === "" || message === null) {
-          alert("Please enter a message.");
-          return false;
-        }
-
-        // Success message and close modal
-        alert("Thank you " + name + "! Your message has been sent.");
-        closeModal();
-        return true;
-      }
-
-      // Close modal when clicking outside the content box
-      window.onclick = function (event) {
-        var modal = document.getElementById("popupModal");
-        if (event.target == modal) {
-          closeModal();
-        }
-      };
-      // SLIDESHOW FUNCTIONALITY
-      let currentSlide = 0;
-      const slides = document.getElementsByClassName("slide");
-      const totalSlides = 4;
-
-      function showNextSlide() {
-        slides[currentSlide].classList.remove("active");
-        currentSlide = (currentSlide + 1) % totalSlides;
-        slides[currentSlide].classList.add("active");
-      }
-
-      window.addEventListener("load", function () {
-        setInterval(showNextSlide, 5000);
-      });
-    </script>
   </head>
 
   <!--BODY-->
@@ -120,14 +20,14 @@
     <nav class="navbar">
       <a class="active" href="#home">HOME</a>
       <a href="#about">ABOUT</a>
-      <a href="#projects">PROJECTS</a>
+      <a href="#explore">EXPLORE</a>
       <a href="#contact">CONTACT</a>
     </nav>
 
     <!--BACKGROUND VIDEO-->
     <header id="home">
-      <video autoplay muted loop id="blueberry_video" aria-hidden="true">
-        <source src="images/video/blueberry.mp4" alt="fresh_blueberries" />
+      <video autoplay muted loop id="fruit_veggie_video" aria-hidden="true">
+        <source src="images/video/fruit_veggie_video.mp4" alt="produce_variety" />
         <!--DISPLAY MESSAGE IF VIDEO FAILS TO RUN-->
         Your browser does not support HTML5 video.
       </video>
@@ -144,7 +44,7 @@
             >Be not afraid of growing slowly; be afraid only of standing still.</q>
           <br />-Chinese Proverb
           <br />
-          <br />My name is Michael Busch. Welcome to my portfolio page! On this
+          <br />Howdy, welcome to my portfolio page! On this
           page, I will tell you about my background and experience.
           <br />
           <br />Thank you for stopping by!
@@ -157,24 +57,17 @@
       <section class="row" id="about">
         <!--LEFT COLUMN-->
         <div class="column_2">
-          <img src="images/Market Baskets.jpeg" alt="produce market display" />
+          <img src="images/Summer_Market_Display.jpg" alt="produce market display" />
         </div>
         <!--RIGHT COLUMN-->
         <div class="column_1">
           <h1>About</h1>
           <p>
-            After 25 years in grocery and produce retail and wholesale, I am now
-            studying AI Development to bring modern technology solutions back to
-            the agriculture industry. I am building technical skills to uncover
-            insights, improve operations, and support smarter decision‑making
-            across the produce sector. My goal is to blend hands‑on industry
-            experience with adaptable, data‑driven problem‑solving to support
-            sustainable practices and strengthen the connection between growers,
-            communities, and the food systems we all rely on.
+            I am currently enrolled in The Tech Academy's AI Developer program, studying core technologies including HTML, CSS, JavaScript, and Python, with a long-term focus on Python and SQL for data analytics—a learning journey that will continue for many years ahead. Building on my experience across 18 years of retail and 7 years of wholesale produce sales, I aim to apply these technical skills to the agriculture industry—uncovering insights, improving operations, and supporting smarter decision‑making. My goal is to blend hands‑on industry experience with adaptable, data‑driven problem‑solving to support sustainable practices and strengthen the connection between growers, communities, and the food systems we all rely on.
           </p>
           <br />
           <p>
-            I am also a golfer, runner, photographer, traveler, live music
+            I am also a golfer, runner, photographer, traveler, and live music
             concert-goer!
           </p>
           <br />
@@ -186,17 +79,22 @@
         </div>
       </section>
 
-      <!--Projects SECTION-->
-      <section class="row" id="projects">
+      <!--EXPLORE SECTION-->
+      <section class="row" id="explore">
         <!--LEFT COLUMN-->
         <div class="column_1">
-          <h1>Projects</h1>
-          <p>You can view my coding projects and photography portfolio here:</p>
+          <h1>Explore</h1>
+          <p>Explore my coding projects, professional network and photography here:</p>
           <p class="center">
-            <a href="https://github.com/mjbusch2121" target="_blank">GitHub</a>
+            <a href="https://github.com/mjbusch2121" target="_blank" rel="noopener noreferrer">GitHub</a>
             <br /><br />
-            <a href="https://michaelbusch.smugmug.com" target="_blank"
-              >SmugMug Photography</a
+            <!--LinkedIn-->
+            <a href="https://www.linkedin.com/in/mike-busch-0b343a34b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <br /><br />
+            <!-- Photography link -->
+            Need some wall art? =>
+            <a href="https://michaelbusch.smugmug.com" target="_blank" rel="noopener noreferrer"
+              >Click Here</a
             >
           </p>
         </div>
@@ -235,40 +133,9 @@
 
       <!--CONTACT SECTION-->
       <section class="row" id="contact">
-        <!--CONTACT LEFT COLUMN-->
+        <!--CONTACT LEFT COLUMN -->
         <div class="column_2 column_tall">
-          <!-- Phone Number Form-->
-          <div class="phone-form-container">
-            <h1>Request a Call Back</h1>
-            <form id="phoneForm" onsubmit="return validatePhoneForm();">
-              <!--Name field for phone form-->
-              <label for="phone-name">Name:</label>
-              <input
-                type="text"
-                id="phone-name"
-                name="phone-name"
-                placeholder="Please Enter Your Name"
-              />
-              <!--Phone Number Field-->
-              <label for="phone-number">Phone Number:</label>
-              <input
-                type="tel"
-                id="phone-number"
-                name="phone-number"
-                placeholder="(555) 123-4567"
-              />
-              <!--Best time to call field-->
-              <label for="call-time">Best Time to Call:</label>
-              <select id="call-time" name="call-time">
-                <option value="">-- Select Time --</option>
-                <option value="morning">Morning (9am-12pm)</option>
-                <option value="afternoon">Afternoon (12pm-5pm)</option>
-                <option value="evening">Evening (5pm-8pm)</option>
-              </select>
-              <!--Submit Button-->
-              <input type="submit" value="REQUEST CALLBACK" />
-            </form>
-          </div>
+          <img src="images/headshot.png" alt="Mike Busch Headshot">
         </div>
         <!--CONTACT FORM, RIGHT COLUMN-->
         <div class="column_1 column_tall">
@@ -281,22 +148,26 @@
             <input
               type="text"
               id="name"
+              name="Name"
               placeholder=" Please enter your name here"
+              required
             />
             <label for="email">Email:</label>
             <input
-              type="text"
+              type="email"
               id="email"
               name="Email"
               placeholder="Please enter your email here"
+              required
             />
             <label for="message">Message:</label>
-            <input
-              type="text"
+            <textarea
               id="message"
               name="Message"
+              rows="4"
               placeholder="Please write your message here"
-            />
+              required
+            ></textarea>
             <input type="submit" value="SUBMIT" />
           </form>
         </div>
@@ -309,7 +180,7 @@
     </footer>
     <!-- FLOATING CONTACT BUTTON -->
     <button class="popup-trigger-btn" onclick="openModal()">
-      Quick Contact
+      Prefer a Phone Call?
     </button>
 
     <!-- POPUP MODAL -->
@@ -323,38 +194,47 @@
         <span class="close-btn" onclick="closeModal()">&times;</span>
 
         <!-- Modal header -->
-        <h2>Quick Contact</h2>
+        <h2>Request a Call Back</h2>
 
-        <!-- Simple contact form inside modal -->
-        <form id="popupForm" onsubmit="return handlePopupSubmit();">
-          <label for="popup-name">Name:</label>
+        <!-- Phone callback form inside modal -->
+        <form id="phoneForm" onsubmit="return validatePhoneForm();">
+          <!--Name field for phone form-->
+          <label for="phone-name">Name:</label>
           <input
             type="text"
-            id="popup-name"
-            name="popup-name"
-            placeholder="Your name"
+            id="phone-name"
+            name="phone-name"
+            placeholder="Please Enter Your Name"
+            required
           />
 
-          <label for="popup-email">Email:</label>
+          <!--Phone Number Field-->
+          <label for="phone-number">Phone Number:</label>
           <input
-            type="email"
-            id="popup-email"
-            name="popup-email"
-            placeholder="your.email@example.com"
+            type="tel"
+            id="phone-number"
+            name="phone-number"
+            placeholder="(555) 123-4567"
+            required
           />
 
-          <label for="popup-message">Message:</label>
-          <textarea
-            id="popup-message"
-            name="popup-message"
-            rows="4"
-            placeholder="Your message here..."
-          ></textarea>
+          <!--Best time to call field-->
+          <label for="call-time">Best Time to Call:</label>
+          <select id="call-time" name="call-time" required>
+            <option value="">-- Select Time --</option>
+            <option value="morning">Morning (9am-12pm)</option>
+            <option value="afternoon">Afternoon (12pm-5pm)</option>
+            <option value="evening">Evening (5pm-8pm)</option>
+          </select>
 
-          <input type="submit" value="SEND MESSAGE" />
+          <!--Submit Button-->
+          <input type="submit" value="REQUEST CALLBACK" />
         </form>
       </div>
     </div>
     <!-- END POPUP MODAL -->
+
+    <!--JavaScript-->
+    <script src="JS/main.js"></script>
   </body>
 </html>

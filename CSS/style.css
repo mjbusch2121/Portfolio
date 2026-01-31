@@ -13,18 +13,36 @@ h1 {
     "Lato", sans-serif; /*sets font for all H1 headings, font imported from fonts.google.com*/
   text-align: center; /* Centering all h1 elements */
   margin-top: 2rem; /* Adds a small margin above h1 elements */
-  color: black;
+  color: black; /* Default black color */
   font-size: calc(
     1.2rem + 1.5vw
   ); /* Scales from ~31px on desktop to ~23px on mobile. */
+  transition: all 0.4s ease; /* Smooth transition for hover effects */
 }
 
-/* Heading 1 element hover effect */
+/* Make headings "pop" with scale and shadow */
 h1:hover {
-  transform: scale(
-    1.03
-  ); /* When the h1 elements are hovered over they increase in size by 1.1 */
-  transition: transform 0.3s ease; /* This causes the transformation to last 1 second */
+  transform: scale(1.1) translateY(-3px); /* Larger scale + slight lift */
+  /* Layered shadows create depth and make text pop out from background */
+  text-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.3),        /* Main drop shadow */
+    0 8px 16px rgba(0, 0, 0, 0.2),       /* Deeper shadow for more depth */
+    0 0 30px rgba(255, 255, 255, 0.5);   /* Subtle white glow for contrast */
+  letter-spacing: 1px; /* Slightly expands text for emphasis */
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bouncy effect */
+}
+
+
+h1:focus {
+  transform: scale(1.1) translateY(-3px);
+  text-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    0 8px 16px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(255, 255, 255, 0.5);
+  letter-spacing: 1px;
+  outline: 2px solid white; /* White outline shows up on both backgrounds */
+  outline-offset: 5px;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 /* Styling for portfolio title text */
@@ -41,7 +59,7 @@ p {
   font-family: "Rubik", sans-serif; /*Rubik from fonts.google.com*/
   text-align: left; /* Justify text within paragraph elements */
   letter-spacing: 0.5px; /* This expands the text slightly */
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem); /* Scales from 1rem on mobile to 1.1rem on desktop */
   margin: 0 0 1rem 0;
   padding: 0 1rem;
 }
@@ -58,6 +76,11 @@ a {
   text-decoration: none;
 }
 a:hover {
+  text-decoration: underline;
+}
+a:focus {
+  outline: 2px solid #577A30; /* Green outline for focused links */
+  outline-offset: 2px;
   text-decoration: underline;
 }
 
@@ -95,8 +118,9 @@ img:hover {
 /* Styling for footer element */
 footer {
   padding: 1.5rem 0; /* This gives the footer padding that is equal to 2% of the width of the element's area */
-  background-color: #c3d9c4;
+  background-color: #B6A164;
   text-align: center;
+  border-top: 4px solid black;
 }
 footer p {
   margin: 0;
@@ -121,7 +145,7 @@ footer p {
   animation-delay: 0.2s; /* About section fades in first */
 }
 
-#projects {
+#explore {
   animation-delay: 0.4s; /* Section fades in second */
 }
 
@@ -133,7 +157,7 @@ footer p {
 /***** NAVBAR STYLING *****/
 .navbar {
   display: flex;
-  background-color: #c3d9c4;
+  background-color: #B6A164;
   position: fixed;
   top: 0;
   width: 100%;
@@ -163,8 +187,15 @@ footer p {
 
 /* Navbar hover effects */
 .navbar a:hover {
-  background-color: #c3d9c4; /* Defines the background color that will display when you hover over the link */
+  background-color: #577A30; /* Defines the background color that will display when you hover over the link */
   color: black; /* This defines the font color that will display when navbar a elements are hovered over */
+}
+
+.navbar a:focus {
+  background-color: #c3d9c4;
+  color: black;
+  outline: 2px solid #577A30;
+  outline-offset: -2px; /* Inset outline so it stays within the navbar */
 }
 /***** END OF NAVBAR STYLING *****/
 
@@ -193,7 +224,7 @@ footer p {
   }
 }
 
-#blueberry_video {
+#fruit_veggie_video {
   position: absolute; /* This fixes the video to the page */
   top: 0;
   left: 0;
@@ -207,7 +238,7 @@ footer p {
 
 /* Screens that are 576px and smaller will not display the background video */
 @media screen and (max-width: 576px) {
-  #blueberry_video {
+  #fruit_veggie_video {
     display: none;
   }
 }
@@ -239,8 +270,8 @@ footer p {
 .row {
   display: flex;
   flex-wrap: wrap;
-  animation: fadeIn 1s ease-out; /* ADD THIS */
-  animation-fill-mode: both; /* ADD THIS - keeps the final state */
+  animation: fadeIn 1s ease-out; 
+  animation-fill-mode: both; 
 }
 .column_1,
 .column_2 {
@@ -249,14 +280,14 @@ footer p {
   min-height: 250px;
 }
 .column_1 {
-  background-color: #c3d9c4;
+  background-color: #577A30;
 }
 
 .column_2 {
-  background-color: #4f6d7a;
+  background-color: #B6A164;
 }
 
-#projects .column_1 {
+#explore .column_1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -265,19 +296,19 @@ footer p {
   padding: 2rem;
   text-align: center;
 }
-#projects .column_2 {
+#explore .column_2 {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#projects a {
+#explore a {
   font-weight: bold;
   color: #000;
   text-decoration: underline;
 }
 
-#projects a:hover {
+#explore a:hover {
   color: #333;
 }
 /* SLIDESHOW STYLING */
@@ -316,6 +347,16 @@ footer p {
   object-position: center; /* Centers the image within the crop */
 }
 
+/* Target the image specifically in the about section's column_2 */
+#about .column_2 img {
+  width: 100%; /* Image fills full width of container */
+  height: 100%; /* Image fills full height of container */
+  object-fit: cover; /* Crops image to fill space while maintaining aspect ratio */
+  object-position: center; /* Centers the image within the crop area */
+  margin: 0; /* Removes the default margin that was preventing full fill */
+  border-radius: 8px; /* Keeps the rounded corners */
+}
+
 #about .column_1 {
   text-align: center; /* centers all text inside this column */
 }
@@ -323,6 +364,15 @@ footer p {
 #about .column_1 p {
   padding: 0 1rem; /* optional: keeps your readable side‑padding */
   text-align: center;
+}
+
+#contact .column_2 img {
+  width: 100%; /* Image fills full width of container */
+  height: 100%; /* Image fills full height of container */
+  object-fit: cover; /* Crops image to fill space while maintaining aspect ratio */
+  object-position: center; /* Centers the image within the crop area */
+  margin: 0; /* Removes the default margin */
+  border-radius: 8px; /* Keeps the rounded corners */
 }
 
 /* This class is applied to the columns in the final row, overriding the height and padding to provide more room for the contact form  while keeping the rest of the formatting from Column_1 or Column_2 */
@@ -352,15 +402,51 @@ footer p {
   margin-bottom: 1.5rem;
 }
 
-/* Screens 576px and smaller will display a scroll bar if the text overflows the column height */
+/* MOBILE RESPONSIVENESS: Screens 576px and smaller */
 @media screen and (max-width: 576px) {
   .column_1,
   .column_2 {
-    width: 100%;
+    width: 100%; /* Stack columns vertically on mobile */
+  }
+
+  /* MOBILE FIX: Reduce form padding on small screens for better space usage */
+  form {
+    padding: 1.5rem;
+  }
+
+  /* MOBILE FIX: Larger touch targets for better mobile usability */
+  .navbar a {
+    padding: 1rem 0.75rem; /* Increased vertical padding for easier tapping */
+    min-height: 44px; /* Ensures minimum touch target size of 44px (Apple's recommendation) */
+  }
+
+  /* MOBILE FIX: Better spacing for form labels on mobile */
+  label {
+    margin-top: 0.5rem;
+    display: block;
   }
 }
 
 /***** END OF TABLE STYLING *****/
+
+/* TABLET BREAKPOINT: Better responsiveness for medium screens (tablets in portrait) */
+@media screen and (min-width: 577px) and (max-width: 768px) {
+  /* Slightly reduce column padding on tablets for better content fit */
+  .column_1,
+  .column_2 {
+    padding: 1.5rem;
+  }
+
+  /* Scale headings appropriately on tablets */
+  h1 {
+    font-size: calc(1.3rem + 1.2vw);
+  }
+
+  /* Adjust form padding for tablets */
+  form {
+    padding: 1.75rem;
+  }
+}
 
 /***** CONTACT FORM STYLING *****/
 /* input[type=text] targets all text input sections of the contact form */
@@ -379,6 +465,13 @@ input[type="text"] {
 /* Hover effects for input boxes */
 input[type="text"]:hover {
   box-shadow: 0 0 5px #00004d inset; /* This creates a blue shadow in the text box when hovered over by the user */
+}
+
+/* ACCESSIBILITY FIX: Focus state for text inputs for keyboard navigation */
+input[type="text"]:focus {
+  outline: 2px solid #577A30; /* Green outline matches your color scheme */
+  outline-offset: 2px;
+  box-shadow: 0 0 5px rgba(87, 122, 48, 0.3); /* Subtle green glow */
 }
 
 /* Submit button */
@@ -403,6 +496,11 @@ input[type="submit"]:hover {
   color: black; /* Turns the font black when hovered over */
   transform: scale(1.05); /* Makes the button increase 1.5 times in size */
   transition: transform 0.3s ease; /* Makes the transform effect last 1.5 seconds */
+}
+
+input[type="submit"]:focus {
+  outline: 3px solid #577A30;
+  outline-offset: 3px;
 }
 
 /* Form element */
@@ -450,6 +548,12 @@ input[type="tel"]:hover {
   box-shadow: 0 0 5px #00004d inset;
 }
 
+input[type="tel"]:focus {
+  outline: 2px solid #577A30;
+  outline-offset: 2px;
+  box-shadow: 0 0 5px rgba(87, 122, 48, 0.3);
+}
+
 /* Style the select dropdown */
 select {
   width: 100%;
@@ -469,40 +573,22 @@ select {
 select:hover {
   box-shadow: 0 0 5px #00004d inset;
 }
-/* Style for form divider between the two forms */
-.form-divider {
-  display: flex;
-  align-items: center;
-  margin: 2rem 0;
-  gap: 1rem;
-}
 
-.form-divider hr {
-  flex: 1; /* Makes the lines stretch to fill available space */
-  border: none;
-  border-top: 2px solid #ccc;
-}
-
-.form-divider p {
-  margin: 0;
-  padding: 0 0.5rem;
-  color: #666;
-  font-weight: bold;
-  font-size: 0.9rem;
+select:focus {
+  outline: 2px solid #577A30;
+  outline-offset: 2px;
+  box-shadow: 0 0 5px rgba(87, 122, 48, 0.3);
 }
 /***** END OF CONTACT FORM STYLING *****/
 
-section.row {
-  margin-bottom: 2rem;
-}
 /***** POPUP MODAL STYLING *****/
 /* Floating trigger button - appears in bottom right corner */
 .popup-trigger-btn {
   position: fixed; /* Stays in place when scrolling */
   bottom: 2rem; /* 2rem from bottom of screen */
   right: 2rem; /* 2rem from right of screen */
-  background-color: #4f6d7a; /* Matches your column_2 color */
-  color: white;
+  background-color: #577A30; 
+  color: white; /* White text on green background */
   border: none;
   padding: 1rem 1.5rem;
   border-radius: 50px; /* Rounded pill shape */
@@ -517,9 +603,16 @@ section.row {
 
 /* Floating button hover effect */
 .popup-trigger-btn:hover {
-  background-color: #c3d9c4; /* Changes to your accent color */
-  color: black;
+  background-color: #B6A164; /* Changes to your tan/gold color on hover */
+  color: black; /* Black text on tan background for contrast */
   transform: scale(1.05); /* Slight grow on hover */
+}
+
+.popup-trigger-btn:focus {
+  outline: 3px solid white;
+  outline-offset: 2px;
+  background-color: #B6A164;
+  color: black;
 }
 
 /* Modal container - hidden by default */
@@ -548,7 +641,7 @@ section.row {
 /* Modal content box - the white popup */
 .modal-content {
   position: relative; /* Positioned above the overlay */
-  background-color: #f5fbef; /* Matches your body background */
+  background-color: #f5fbef; 
   margin: 5% auto; /* Centered horizontally, 5% from top */
   padding: 2rem;
   border: 3px solid #c3d9c4; /* Border in your accent color */
@@ -580,10 +673,20 @@ section.row {
   line-height: 1;
   cursor: pointer;
   transition: color 0.3s ease;
+  /* ACCESSIBILITY FIX: Add padding for larger touch target */
+  padding: 0.5rem;
+  margin: -0.5rem; /* Negative margin to maintain visual position */
 }
 
 .close-btn:hover {
   color: #000; /* Darkens on hover */
+}
+
+/* ACCESSIBILITY FIX: Focus state for close button */
+.close-btn:focus {
+  outline: 2px solid #577A30;
+  outline-offset: 2px;
+  color: #000;
 }
 
 /* Modal heading */
@@ -593,10 +696,10 @@ section.row {
   text-align: center;
   margin-top: 0;
   margin-bottom: 1.5rem;
-  text-transform: uppercase; /* Matches your h1 style */
+  text-transform: uppercase;
 }
 
-/* Popup form styling - matches your existing forms */
+/* Popup form styling */
 #popupForm {
   border-radius: 5px;
   background-color: #fff;
@@ -622,6 +725,12 @@ textarea:hover {
   box-shadow: 0 0 5px #00004d inset; /* Matches your input hover effect */
 }
 
+textarea:focus {
+  outline: 2px solid #577A30;
+  outline-offset: 2px;
+  box-shadow: 0 0 5px rgba(87, 122, 48, 0.3);
+}
+
 /* Email input field styling */
 input[type="email"] {
   width: 100%;
@@ -637,6 +746,12 @@ input[type="email"] {
 
 input[type="email"]:hover {
   box-shadow: 0 0 5px #00004d inset;
+}
+
+input[type="email"]:focus {
+  outline: 2px solid #577A30;
+  outline-offset: 2px;
+  box-shadow: 0 0 5px rgba(87, 122, 48, 0.3);
 }
 
 /* Mobile responsive adjustments */
