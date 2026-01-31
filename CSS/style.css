@@ -52,6 +52,8 @@ h1:focus {
     calc(1.5rem + 2vw),
     4rem
   ); /* Prevents title from getting too huge on large screens */
+  padding: 0 0.5rem; /* Prevents text from touching edges */
+  word-wrap: break-word; /* Allows text to wrap if needed */
 }
 
 /* Paragraph elements */
@@ -207,6 +209,7 @@ footer p {
   height: 450px;
   overflow: hidden;
   margin-top: 3rem; /* creates space below navbar so video doesn't start behind it */
+  background-color: #577A30; /* Fallback background color if video doesn't load */
 }
 
 /* Make video section responsive on tablets and smaller */
@@ -219,7 +222,8 @@ footer p {
 
 @media screen and (max-width: 576px) {
   #home {
-    height: 250px;
+    min-height: 400px; /* Changed from height to min-height, increased size */
+    height: auto; /* Allows section to grow if needed */
     margin-top: 2rem;
   }
 }
@@ -236,12 +240,7 @@ footer p {
   z-index: -1; /* This places the video behind the other elements on the page */
 }
 
-/* Screens that are 576px and smaller will not display the background video */
-@media screen and (max-width: 576px) {
-  #fruit_veggie_video {
-    display: none;
-  }
-}
+/* Video now displays on all screen sizes including mobile */
 
 /* Texts over the video */
 .video_text {
@@ -424,6 +423,20 @@ footer p {
   label {
     margin-top: 0.5rem;
     display: block;
+  }
+
+  /* MOBILE FIX: Better video text spacing and sizing */
+  .video_text {
+    padding: 2rem 1rem; /* More vertical padding */
+  }
+
+  .video_text p {
+    font-size: 0.9rem; /* Slightly smaller but still readable */
+    line-height: 1.6; /* Better line spacing */
+  }
+
+  .white-text {
+    font-size: 1.8rem; /* Ensure title is readable but fits */
   }
 }
 
