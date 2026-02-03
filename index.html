@@ -27,7 +27,10 @@
     <!--BACKGROUND VIDEO-->
     <header id="home">
       <video autoplay muted loop id="fruit_veggie_video" aria-hidden="true">
-        <source src="images/video/fruit_veggie_video.mp4" alt="produce_variety" />
+        <source
+          src="images/video/fruit_veggie_video.mp4"
+          alt="produce_variety"
+        />
         <!--DISPLAY MESSAGE IF VIDEO FAILS TO RUN-->
         Your browser does not support HTML5 video.
       </video>
@@ -41,11 +44,12 @@
           <br />
           <br />
           <q
-            >Be not afraid of growing slowly; be afraid only of standing still.</q>
+            >Be not afraid of growing slowly; be afraid only of standing
+            still.</q
+          >
           <br />-Chinese Proverb
           <br />
-          <br />Howdy, welcome to my portfolio page! On this
-          page, I will tell you about my background and experience.
+          <br />Howdy, welcome to my portfolio page! Explore and get in touch if you would like to work together!
           <br />
           <br />Thank you for stopping by!
         </p>
@@ -57,13 +61,27 @@
       <section class="row" id="about">
         <!--LEFT COLUMN-->
         <div class="column_2">
-          <img src="images/Summer_Market_Display.jpg" alt="produce market display" />
+          <img
+            src="images/Summer_Market_Display.jpg"
+            alt="produce market display"
+          />
         </div>
         <!--RIGHT COLUMN-->
         <div class="column_1">
           <h1>About</h1>
           <p>
-            I am currently enrolled in The Tech Academy's AI Developer program, studying core technologies including HTML, CSS, JavaScript, and Python, with a long-term focus on Python and SQL for data analytics—a learning journey that will continue for many years ahead. Building on my experience across 18 years of retail and 7 years of wholesale produce sales, I aim to apply these technical skills to the agriculture industry—uncovering insights, improving operations, and supporting smarter decision‑making. My goal is to blend hands‑on industry experience with adaptable, data‑driven problem‑solving to support sustainable practices and strengthen the connection between growers, communities, and the food systems we all rely on.
+            I am currently enrolled in The Tech Academy's AI Developer program,
+            studying core technologies including HTML, CSS, JavaScript, and
+            Python, with a long-term focus on Python and SQL for data
+            analytics—a learning journey that will continue for many years
+            ahead. Building on my experience across 18 years of retail and 7
+            years of wholesale produce sales, I aim to apply these technical
+            skills to the agriculture industry—uncovering insights, improving
+            operations, and supporting smarter decision‑making. My goal is to
+            blend hands‑on industry experience with adaptable, data‑driven
+            problem‑solving to support sustainable practices and strengthen the
+            connection between growers, communities, and the food systems we all
+            rely on.
           </p>
           <br />
           <p>
@@ -84,16 +102,32 @@
         <!--LEFT COLUMN-->
         <div class="column_1">
           <h1>Explore</h1>
-          <p>Explore my coding projects, professional network and photography here:</p>
+          <p>
+            Explore my coding projects, professional network and photography
+            here:
+          </p>
           <p class="center">
-            <a href="https://github.com/mjbusch2121" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a
+              href="https://github.com/mjbusch2121"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub</a
+            >
             <br /><br />
             <!--LinkedIn-->
-            <a href="https://www.linkedin.com/in/mike-busch-0b343a34b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a
+              href="https://www.linkedin.com/in/mike-busch-0b343a34b/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >LinkedIn</a
+            >
             <br /><br />
             <!-- Photography link -->
             Need some wall art? =>
-            <a href="https://michaelbusch.smugmug.com" target="_blank" rel="noopener noreferrer"
+            <a
+              href="https://michaelbusch.smugmug.com"
+              target="_blank"
+              rel="noopener noreferrer"
               >Click Here</a
             >
           </p>
@@ -135,12 +169,12 @@
       <section class="row" id="contact">
         <!--CONTACT LEFT COLUMN -->
         <div class="column_2 column_tall">
-          <img src="images/headshot.png" alt="Mike Busch Headshot">
+          <img src="images/headshot.png" alt="Mike Busch Headshot" />
         </div>
         <!--CONTACT FORM, RIGHT COLUMN-->
         <div class="column_1 column_tall">
           <h1>Send a Message</h1>
-          
+
           <!--THIS SPECIFIES WHERE AND HOW TO SEND THE FORM DATA; WE ARE LEAVING IT BLANK-->
           <form action="https://formspree.io/f/mvzzpdej" method="POST">
             <!--HERE WE ARE UTILIZING A 3RD PARTY SERVICE TO SUBMIT THE FORM DATA, INSERT YOUR FORMSPREE ENDPOINT IN THE ACTION ATTRIBUTE-->
@@ -197,7 +231,12 @@
         <h2>Request a Call Back</h2>
 
         <!-- Phone callback form inside modal -->
-        <form id="phoneForm" onsubmit="return validatePhoneForm();">
+        <form
+          id="phoneForm"
+          action="https://formspree.io/f/mvzzpdej"
+          method="POST"
+          onsubmit="return validatePhoneForm();"
+        >
           <!--Name field for phone form-->
           <label for="phone-name">Name:</label>
           <input
