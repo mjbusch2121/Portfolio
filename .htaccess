@@ -1,0 +1,23 @@
+# Default index file
+DirectoryIndex index.html
+
+# Enable MIME types for video files
+AddType video/mp4 .mp4
+AddType video/webm .webm
+AddType video/ogg .ogv
+
+# Enable CORS for video files (allows cross-origin loading)
+<FilesMatch "\.(mp4|webm|ogv)$">
+  Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
+
+# Enable compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript
+</IfModule>
+
+# Browser caching for videos
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType video/mp4 "access plus 1 month"
+</IfModule>
