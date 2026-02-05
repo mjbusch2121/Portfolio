@@ -237,7 +237,7 @@ footer p {
   min-width: 100%; /* This ensures the video is displayed across the full width of the page */
   min-height: 100%;
   object-fit: cover;
-  z-index: -1; /* This places the video behind the other elements on the page */
+  z-index: 1; /* Video layer */
 }
 
 /* Video now displays on all screen sizes including mobile */
@@ -254,6 +254,7 @@ footer p {
   display: flex; /* helps with centering content */
   flex-direction: column; /* stacks content vertically */
   justify-content: center; /* centers content vertically */
+  z-index: 2; /* Text appears above video */
   animation: fadeIn 1.2s ease-out; /* Smooth entrance for the hero text */
 }
 
