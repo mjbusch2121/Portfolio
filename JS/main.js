@@ -1,3 +1,41 @@
+// DARK MODE TOGGLE FUNCTIONALITY
+
+// Function to toggle between light and dark mode
+function toggleTheme() {
+  const html = document.documentElement;
+  const themeIcon = document.getElementById("theme-icon");
+  const currentTheme = html.getAttribute("data-theme");
+
+  // Toggle between light and dark
+  if (currentTheme === "dark") {
+    html.setAttribute("data-theme", "light");
+    themeIcon.textContent = "🌙"; // Moon icon for light mode (click to go dark)
+    localStorage.setItem("theme", "light");
+  } else {
+    html.setAttribute("data-theme", "dark");
+    themeIcon.textContent = "☀️"; // Sun icon for dark mode (click to go light)
+    localStorage.setItem("theme", "dark");
+  }
+}
+
+// Load saved theme preference on page load
+function loadTheme() {
+  const savedTheme = localStorage.getItem("theme");
+  const html = document.documentElement;
+  const themeIcon = document.getElementById("theme-icon");
+
+  if (savedTheme === "dark") {
+    html.setAttribute("data-theme", "dark");
+    themeIcon.textContent = "☀️";
+  } else {
+    html.setAttribute("data-theme", "light");
+    themeIcon.textContent = "🌙";
+  }
+}
+
+// Load theme when page loads
+document.addEventListener("DOMContentLoaded", loadTheme);
+
 // Function to validate the phone callback form
 function validatePhoneForm() {
   // Get the values from each form field

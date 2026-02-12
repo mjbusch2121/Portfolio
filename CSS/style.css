@@ -1,9 +1,47 @@
+/*COLOR VARIABLES FOR LIGHT/DARK MODE*/
+:root {
+  /* Light Mode Colors (Default) */
+  --bg-primary: #f5fbef;
+  --bg-secondary: #f2f2f2;
+  --bg-tertiary: #f9f9f9;
+  --color-green-dark: #577A30;
+  --color-yellow: #f4ef88;
+  --color-accent: #c3d9c4;
+  --text-primary: black;
+  --text-secondary: white;
+  --border-primary: black;
+  --border-secondary: #ccc;
+  --shadow-primary: rgba(0, 0, 0, 0.3);
+  --shadow-secondary: rgba(0, 0, 0, 0.2);
+  --shadow-blue: #00004d;
+  --outline-focus: white;
+}
+
+/* Dark Mode Colors */
+[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #3a3a3a;
+  --color-green-dark: #577A30; /* Keeping original green for brand consistency */
+  --color-yellow: #d4c976;
+  --color-accent: #4a5c3e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #f5f5f5;
+  --border-primary: #555;
+  --border-secondary: #666;
+  --shadow-primary: rgba(0, 0, 0, 0.6);
+  --shadow-secondary: rgba(0, 0, 0, 0.4);
+  --shadow-blue: #4a7ba7;
+  --outline-focus: #577A30; /* Using original green for focus states too */
+}
+
 /*GENERAL STYLING*/
 
 /*BODY STYLING*/
 body {
   margin: 0; /*This ensures our site displays all the way to the edge of the browser screen*/
-  background-color: #f5fbef;
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Heading 1 elements */
@@ -13,7 +51,7 @@ h1 {
     "Lato", sans-serif; /*sets font for all H1 headings, font imported from fonts.google.com*/
   text-align: center; /* Centering all h1 elements */
   margin-top: 2rem; /* Adds a small margin above h1 elements */
-  color: black; /* Default black color */
+  color: var(--text-primary); /* Default text color */
   font-size: calc(
     1.2rem + 1.5vw
   ); /* Scales from ~31px on desktop to ~23px on mobile. */
@@ -40,7 +78,7 @@ h1:focus {
     0 8px 16px rgba(0, 0, 0, 0.2),
     0 0 30px rgba(255, 255, 255, 0.5);
   letter-spacing: 1px;
-  outline: 2px solid white; /* White outline shows up on both backgrounds */
+  outline: 2px solid var(--outline-focus); /* Outline adapts to theme */
   outline-offset: 5px;
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -64,6 +102,8 @@ p {
   font-size: clamp(1rem, 2.5vw, 1.1rem); /* Scales from 1rem on mobile to 1.1rem on desktop */
   margin: 0 0 1rem 0;
   padding: 0 1rem;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
 }
 
 /* Center class - this applies to all elements with the class "center" */
@@ -74,14 +114,14 @@ p {
 
 /* Anchor elements */
 a {
-  color: black; /* This ensures all links are colored */
+  color: var(--text-primary); /* This ensures all links are colored */
   text-decoration: none;
 }
 a:hover {
   text-decoration: underline;
 }
 a:focus {
-  outline: 2px solid #577A30; /* Green outline for focused links */
+  outline: 2px solid var(--color-green-dark); /* Green outline for focused links */
   outline-offset: 2px;
   text-decoration: underline;
 }
@@ -120,9 +160,9 @@ img:hover {
 /* Styling for footer element */
 footer {
   padding: 1.5rem 0; /* This gives the footer padding that is equal to 2% of the width of the element's area */
-  background-color: #B6A164;
+  background-color: var(--color-yellow);
   text-align: center;
-  border-top: 4px solid black;
+  border-top: 4px solid var(--border-primary);
 }
 footer p {
   margin: 0;
@@ -159,18 +199,26 @@ footer p {
 /***** NAVBAR STYLING *****/
 .navbar {
   display: flex;
-  background-color: #B6A164;
+  background-color: var(--color-yellow);
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 10;
   padding: 0.5rem;
   animation: fadeIn 0.8s ease-out; /* Navbar fades in quickly*/
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Navbar links container */
+.navbar-links {
+  display: flex;
+  gap: 0;
 }
 
 /* Navbar links */
 .navbar a {
-  color: white; /* This is the font color for text on our navbar */
+  color: var(--text-primary); /* This is the font color for text on our navbar */
   padding: 0.75rem 1rem; /* This adds padding around our text */
   text-decoration: none; /* This gets rid of the underlines under the text on our navbar */
   font-family:
@@ -189,15 +237,52 @@ footer p {
 
 /* Navbar hover effects */
 .navbar a:hover {
-  background-color: #577A30; /* Defines the background color that will display when you hover over the link */
-  color: black; /* This defines the font color that will display when navbar a elements are hovered over */
+  background-color: var(--color-green-dark); /* Defines the background color that will display when you hover over the link */
+  color: var(--text-secondary); /* This defines the font color that will display when navbar a elements are hovered over */
 }
 
 .navbar a:focus {
-  background-color: #c3d9c4;
-  color: black;
-  outline: 2px solid #577A30;
+  background-color: var(--color-accent);
+  color: var(--text-primary);
+  outline: 2px solid var(--color-green-dark);
   outline-offset: -2px; /* Inset outline so it stays within the navbar */
+}
+
+/* Dark Mode Toggle Button */
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--text-primary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  margin-left: auto;
+  color: var(--text-primary);
+}
+
+.theme-toggle:hover {
+  background-color: var(--color-green-dark);
+  color: var(--text-secondary);
+  transform: rotate(20deg) scale(1.1);
+}
+
+.theme-toggle:focus {
+  outline: 2px solid var(--color-green-dark);
+  outline-offset: 2px;
+}
+
+/* Mobile responsive adjustments for theme toggle */
+@media screen and (max-width: 576px) {
+  .theme-toggle {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
 }
 /***** END OF NAVBAR STYLING *****/
 
@@ -209,7 +294,7 @@ footer p {
   height: 450px;
   overflow: hidden;
   margin-top: 3rem; /* creates space below navbar so video doesn't start behind it */
-  background-color: #577A30; /* Fallback background color if video doesn't load */
+  background-color: var(--color-green-dark); /* Fallback background color if video doesn't load */
 }
 
 /* Make video section responsive on tablets and smaller */
@@ -280,11 +365,11 @@ footer p {
   min-height: 250px;
 }
 .column_1 {
-  background-color: #577A30;
+  background-color: var(--color-green-dark);
 }
 
 .column_2 {
-  background-color: #B6A164;
+  background-color: var(--color-yellow);
 }
 
 #explore .column_1 {
@@ -304,12 +389,12 @@ footer p {
 
 #explore a {
   font-weight: bold;
-  color: #000;
+  color: var(--text-primary);
   text-decoration: underline;
 }
 
 #explore a:hover {
-  color: #333;
+  color: var(--text-primary);
 }
 /* SLIDESHOW STYLING */
 /* Container for the slideshow */
@@ -463,17 +548,28 @@ footer p {
 }
 
 /***** CONTACT FORM STYLING *****/
+
+/* Label styling for all forms */
+label {
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+  font-family: "Lato", sans-serif;
+}
+
 /* input[type=text] targets all text input sections of the contact form */
 input[type="text"] {
   width: 100%; /* Each input box covers the full width of the container */
   padding: 12px; /* Adds padding within the text box */
-  border: 1px solid #ccc; /* Setting a solid border and its color */
+  border: 1px solid var(--border-secondary); /* Setting a solid border and its color */
   border-radius: 4px; /* Slightly rounds the corners of the text box border */
   box-sizing: border-box; /* This creates a box with a border around the contact form input boxes */
   margin-top: 6px; /* Adds a margin to the top of the text box */
   margin-bottom: 16px; /* Adds a margin to the bottom of the text box */
   resize: vertical; /* This allows the user to resize the text boxes vertically */
   font-family: "Rubik", sans-serif;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Hover effects for input boxes */
@@ -483,7 +579,7 @@ input[type="text"]:hover {
 
 /* ACCESSIBILITY FIX: Focus state for text inputs for keyboard navigation */
 input[type="text"]:focus {
-  outline: 2px solid #577A30; /* Green outline matches your color scheme */
+  outline: 2px solid var(--color-green-dark); /* Green outline matches your color scheme */
   outline-offset: 2px;
   box-shadow: 0 0 5px rgba(87, 122, 48, 0.3); /* Subtle green glow */
 }
@@ -506,21 +602,21 @@ input[type="submit"] {
 
 /* Hover effect for submit button */
 input[type="submit"]:hover {
-  background-color: #c3d9c4; /* Turns the background of the submit button white when the user hovers over it */
+  background-color: var(--color-accent); /* Turns the background of the submit button white when the user hovers over it */
   color: black; /* Turns the font black when hovered over */
   transform: scale(1.05); /* Makes the button increase 1.5 times in size */
   transition: transform 0.3s ease; /* Makes the transform effect last 1.5 seconds */
 }
 
 input[type="submit"]:focus {
-  outline: 3px solid #577A30;
+  outline: 3px solid var(--color-green-dark);
   outline-offset: 3px;
 }
 
 /* Form element */
 form {
   border-radius: 5px; /* Rounds the corners of the contact form */
-  background-color: #f2f2f2;
+  background-color: var(--bg-secondary);
   padding: 2rem; /* Adds padding to the contact form */
   font-family: "Lato", sans-serif;
 }
@@ -531,7 +627,7 @@ form {
 /* Heading for phone form */
 .phone-form-container h3 {
   font-family: "Lato", sans-serif;
-  color: #333;
+  color: var(--text-primary);
   text-align: center;
   margin-bottom: 1rem;
   font-size: 1.3rem;
@@ -539,23 +635,26 @@ form {
 /* Style the phone form */
 #phoneForm {
   border-radius: 5px;
-  background-color: #f9f9f9; /* Slightly different color than main form */
+  background-color: var(--bg-tertiary); /* Slightly different color than main form */
   padding: 1.5rem;
   font-family: "Lato", sans-serif;
-  border: 2px solid #c3d9c4; /* Adds a subtle border to distinguish it */
+  border: 2px solid var(--color-accent); /* Adds a subtle border to distinguish it */
 }
 
 /* Phone number input field */
 input[type="tel"] {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-secondary);
   border-radius: 4px;
   box-sizing: border-box;
   margin-top: 6px;
   margin-bottom: 16px;
   font-family: "Rubik", sans-serif;
   font-size: 1rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 /* Hover effect for phone input */
 input[type="tel"]:hover {
@@ -563,7 +662,7 @@ input[type="tel"]:hover {
 }
 
 input[type="tel"]:focus {
-  outline: 2px solid #577A30;
+  outline: 2px solid var(--color-green-dark);
   outline-offset: 2px;
   box-shadow: 0 0 5px rgba(87, 122, 48, 0.3);
 }
@@ -572,15 +671,17 @@ input[type="tel"]:focus {
 select {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-secondary);
   border-radius: 4px;
   box-sizing: border-box;
   margin-top: 6px;
   margin-bottom: 16px;
   font-family: "Rubik", sans-serif;
   font-size: 1rem;
-  background-color: white;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Hover effect for dropdown */
@@ -589,7 +690,7 @@ select:hover {
 }
 
 select:focus {
-  outline: 2px solid #577A30;
+  outline: 2px solid var(--color-green-dark);
   outline-offset: 2px;
   box-shadow: 0 0 5px rgba(87, 122, 48, 0.3);
 }
@@ -601,8 +702,8 @@ select:focus {
   position: fixed; /* Stays in place when scrolling */
   bottom: 2rem; /* 2rem from bottom of screen */
   right: 2rem; /* 2rem from right of screen */
-  background-color: #577A30; 
-  color: white; /* White text on green background */
+  background-color: var(--color-green-dark);
+  color: var(--text-secondary); /* Adapts to theme */
   border: none;
   padding: 1rem 1.5rem;
   border-radius: 50px; /* Rounded pill shape */
@@ -610,23 +711,23 @@ select:focus {
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 4px 10px var(--shadow-primary); /* Shadow adapts to theme */
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   z-index: 999; /* Appears above most content */
 }
 
 /* Floating button hover effect */
 .popup-trigger-btn:hover {
-  background-color: #B6A164; /* Changes to your tan/gold color on hover */
-  color: black; /* Black text on tan background for contrast */
+  background-color: var(--color-yellow); /* Changes to your tan/gold color on hover */
+  color: var(--text-primary); /* Adapts text color for theme */
   transform: scale(1.05); /* Slight grow on hover */
 }
 
 .popup-trigger-btn:focus {
-  outline: 3px solid white;
+  outline: 3px solid var(--outline-focus);
   outline-offset: 2px;
-  background-color: #B6A164;
-  color: black;
+  background-color: var(--color-yellow);
+  color: var(--text-primary);
 }
 
 /* Modal container - hidden by default */
@@ -655,10 +756,10 @@ select:focus {
 /* Modal content box - the white popup */
 .modal-content {
   position: relative; /* Positioned above the overlay */
-  background-color: #f5fbef; 
+  background-color: var(--bg-primary);
   margin: 5% auto; /* Centered horizontally, 5% from top */
   padding: 2rem;
-  border: 3px solid #c3d9c4; /* Border in your accent color */
+  border: 3px solid var(--color-accent); /* Border in your accent color */
   border-radius: 8px; /* Rounded corners like your images */
   width: 90%;
   max-width: 500px; /* Max width on larger screens */
@@ -680,7 +781,7 @@ select:focus {
 
 /* Close button (X) in top right */
 .close-btn {
-  color: #666;
+  color: var(--text-primary);
   float: right; /* Positioned in top right */
   font-size: 2rem;
   font-weight: bold;
@@ -693,20 +794,20 @@ select:focus {
 }
 
 .close-btn:hover {
-  color: #000; /* Darkens on hover */
+  color: var(--text-primary); /* Darkens on hover */
 }
 
 /* ACCESSIBILITY FIX: Focus state for close button */
 .close-btn:focus {
-  outline: 2px solid #577A30;
+  outline: 2px solid var(--color-green-dark);
   outline-offset: 2px;
-  color: #000;
+  color: var(--text-primary);
 }
 
 /* Modal heading */
 .modal-content h2 {
   font-family: "Lato", sans-serif;
-  color: #333;
+  color: var(--text-primary);
   text-align: center;
   margin-top: 0;
   margin-bottom: 1.5rem;
@@ -716,7 +817,7 @@ select:focus {
 /* Popup form styling */
 #popupForm {
   border-radius: 5px;
-  background-color: #fff;
+  background-color: var(--bg-secondary);
   padding: 1.5rem;
   font-family: "Lato", sans-serif;
 }
@@ -725,7 +826,7 @@ select:focus {
 textarea {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-secondary);
   border-radius: 4px;
   box-sizing: border-box;
   margin-top: 6px;
@@ -733,6 +834,9 @@ textarea {
   font-family: "Rubik", sans-serif;
   font-size: 1rem;
   resize: vertical; /* User can resize vertically only */
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 textarea:hover {
@@ -740,7 +844,7 @@ textarea:hover {
 }
 
 textarea:focus {
-  outline: 2px solid #577A30;
+  outline: 2px solid var(--color-green-dark);
   outline-offset: 2px;
   box-shadow: 0 0 5px rgba(87, 122, 48, 0.3);
 }
@@ -749,13 +853,16 @@ textarea:focus {
 input[type="email"] {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border-secondary);
   border-radius: 4px;
   box-sizing: border-box;
   margin-top: 6px;
   margin-bottom: 16px;
   font-family: "Rubik", sans-serif;
   font-size: 1rem;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 input[type="email"]:hover {
@@ -763,7 +870,7 @@ input[type="email"]:hover {
 }
 
 input[type="email"]:focus {
-  outline: 2px solid #577A30;
+  outline: 2px solid var(--color-green-dark);
   outline-offset: 2px;
   box-shadow: 0 0 5px rgba(87, 122, 48, 0.3);
 }
