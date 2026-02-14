@@ -85,7 +85,7 @@ h1:focus {
 
 /* Styling for portfolio title text */
 .white-text {
-  color: #fff; /* This is used to change the color of the portfolio title text */
+  color: var(--text-primary); /* Adapts to theme: black in light mode, light gray in dark mode */
   font-size: min(
     calc(1.5rem + 2vw),
     4rem
@@ -341,6 +341,12 @@ footer p {
   justify-content: center; /* centers content vertically */
   z-index: 2; /* Text appears above video */
   animation: fadeIn 1.2s ease-out; /* Smooth entrance for the hero text */
+}
+
+/* Video text paragraph styling - bold and bigger */
+.video_text p {
+  font-weight: bold; /* Makes text bold */
+  font-size: clamp(1.1rem, 3vw, 1.3rem); /* Bigger text that scales responsively */
 }
 
 /***** END OF VIDEO STYLING *****/
