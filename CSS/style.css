@@ -439,13 +439,23 @@ footer p {
 }
 
 /* Target the image specifically in the about section's column_2 */
+#about .column_2 {
+  overflow: hidden;
+  position: relative; /* Allows absolutely positioned image inside */
+}
+
 #about .column_2 img {
-  width: 100%; /* Image fills full width of container */
-  height: 100%; /* Image fills full height of container */
-  object-fit: cover; /* Crops image to fill space while maintaining aspect ratio */
-  object-position: center; /* Centers the image within the crop area */
-  margin: 0; /* Removes the default margin that was preventing full fill */
-  border-radius: 8px; /* Keeps the rounded corners */
+  position: absolute; /* Removes image from document flow so it can't stretch the column */
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+  object-fit: cover;
+  object-position: center;
+  margin: 0;
+  border-radius: 8px;
 }
 
 #about .column_1 {
