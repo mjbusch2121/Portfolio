@@ -1,18 +1,17 @@
 # Portfolio
 
-Welcome to my personal portfolio! 
-This site showcases my journey through the Tech Academy bootcamp, featuring hands-on projects, semantic HTML/CSS layouts, and accessibility-focused design. 
-It’s built to demonstrate my growth, creativity, and technical skills to instructors, recruiters, and collaborators.
+Welcome to my personal portfolio!
+This site tracks my move from 15+ years in the fresh produce industry toward
+data analyst work — built with the front-end skills from The Tech Academy's
+AI Software Developer Bootcamp, and updated as I grow my Python and SQL skills.
 
 ## Overview
 - **Built with**: HTML5, CSS3, JavaScript, GitHub
-- **Focus areas**: Semantic structure, responsive design, accessibility, and clean layout
+- **Focus areas**: Semantic structure, responsive design, accessibility, dark mode
 - **Sections include**:
-  - 🎥 Video and intro text
+  - 🏠 Hero intro
   - 👤 About Me
-  - 💻 GitHub Projects, LinkedIn and Photography Link
+  - 🛠️ Skills (Excel, Python, SQL, produce domain knowledge)
+  - 📊 Projects (in progress — check back for case studies)
+  - 📷 Buschwood Photography
   - 📬 Contact + Call Back Form
-
-
-
-
