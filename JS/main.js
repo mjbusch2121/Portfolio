@@ -1,135 +1,111 @@
-// DARK MODE TOGGLE FUNCTIONALITY
+/* ============================================================
+   Michael Busch — Portfolio JavaScript
+   Four small features, each in its own labeled block:
+   1. Dark mode toggle (remembers your choice)
+   2. Photography slideshow
+   3. Callback modal (open / close / validate)
+   4. Scroll-reveal animation
+   ============================================================ */
 
-// Function to toggle between light and dark mode
+/* ---------- 1. DARK MODE TOGGLE ---------- */
+
+// Runs once when the page loads: restore the saved theme, if any.
+(function restoreTheme() {
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+    updateThemeIcon();
+  }
+})();
+
 function toggleTheme() {
-  const html = document.documentElement;
-  const themeIcon = document.getElementById("theme-icon");
-  const currentTheme = html.getAttribute("data-theme");
+  document.body.classList.toggle("dark-mode");
 
-  // Toggle between light and dark
-  if (currentTheme === "dark") {
-    html.setAttribute("data-theme", "light");
-    themeIcon.textContent = "🌙"; // Moon icon for light mode (click to go dark)
-    localStorage.setItem("theme", "light");
-  } else {
-    html.setAttribute("data-theme", "dark");
-    themeIcon.textContent = "☀️"; // Sun icon for dark mode (click to go light)
-    localStorage.setItem("theme", "dark");
-  }
+  // Save the choice so it sticks between visits
+  const isDark = document.body.classList.contains("dark-mode");
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+
+  updateThemeIcon();
 }
 
-// Load saved theme preference on page load
-function loadTheme() {
-  const savedTheme = localStorage.getItem("theme");
-  const html = document.documentElement;
-  const themeIcon = document.getElementById("theme-icon");
-
-  if (savedTheme === "dark") {
-    html.setAttribute("data-theme", "dark");
-    themeIcon.textContent = "☀️";
-  } else {
-    html.setAttribute("data-theme", "light");
-    themeIcon.textContent = "🌙";
-  }
+function updateThemeIcon() {
+  const icon = document.getElementById("theme-icon");
+  if (!icon) return;
+  // Moon = "switch to dark", sun = "switch to light"
+  icon.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
 }
 
-// Load theme when page loads
-document.addEventListener("DOMContentLoaded", loadTheme);
+/* ---------- 2. SLIDESHOW ---------- */
 
-// Function to validate the phone callback form
-function validatePhoneForm() {
-  // Get the values from each form field
-  var name = document.getElementById("phone-name").value;
-  var phone = document.getElementById("phone-number").value;
-  var callTime = document.getElementById("call-time").value;
-
-  // Check if name field is empty
-  if (name === "" || name === null) {
-    alert("Please enter your name before submitting.");
-    return false; // Prevents form submission
-  }
-
-  // Check if phone number field is empty
-  if (phone === "" || phone === null) {
-    alert("Please enter your phone number before submitting.");
-    return false; // Prevents form submission
-  }
-
-  // Check if a call time was selected
-  if (callTime === "" || callTime === null) {
-    alert("Please select your preferred call time before submitting.");
-    return false; // Prevents form submission
-  }
-
-  // If all fields are filled, show success message
-  alert(
-    "Thank you! We'll call you back during your preferred time: " +
-      callTime,
-  );
-  return true; // Allows form submission
-}
-// POPUP MODAL FUNCTIONS
-
-// Function to open the modal
-function openModal() {
-  document.getElementById("popupModal").style.display = "block";
-  document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
-}
-
-// Function to close the modal
-function closeModal() {
-  document.getElementById("popupModal").style.display = "none";
-  document.body.style.overflow = "auto"; // Restore scrolling
-}
-
-// Function to handle popup form submission with validation
-function handlePopupSubmit() {
-  var name = document.getElementById("popup-name").value;
-  var email = document.getElementById("popup-email").value;
-  var message = document.getElementById("popup-message").value;
-
-  // Validate name field
-  if (name === "" || name === null) {
-    alert("Please enter your name.");
-    return false;
-  }
-
-  // Validate email field
-  if (email === "" || email === null) {
-    alert("Please enter your email.");
-    return false;
-  }
-
-  // Validate message field
-  if (message === "" || message === null) {
-    alert("Please enter a message.");
-    return false;
-  }
-
-  // Success message and close modal
-  alert("Thank you " + name + "! Your message has been sent.");
-  closeModal();
-  return true;
-}
-
-// Close modal when clicking outside the content box
-window.onclick = function (event) {
-  var modal = document.getElementById("popupModal");
-  if (event.target == modal) {
-    closeModal();
-  }
-};
-// SLIDESHOW FUNCTIONALITY
+const slides = document.querySelectorAll(".slide");
 let currentSlide = 0;
-const slides = document.getElementsByClassName("slide");
-const totalSlides = 4;
 
-function showNextSlide() {
+function nextSlide() {
+  if (slides.length === 0) return; // nothing to do if no slides exist
+
   slides[currentSlide].classList.remove("active");
-  currentSlide = (currentSlide + 1) % totalSlides;
+  // The % (remainder) wraps back to 0 after the last slide
+  currentSlide = (currentSlide + 1) % slides.length;
   slides[currentSlide].classList.add("active");
 }
 
-window.addEventListener("load", function () {
-  setInterval(showNextSlide, 5000);
+// Change slides every 4.5 seconds
+if (slides.length > 1) {
+  setInterval(nextSlide, 4500);
+}
+
+/* ---------- 3. CALLBACK MODAL ---------- */
+
+function openModal() {
+  const modal = document.getElementById("popupModal");
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closeModal() {
+  const modal = document.getElementById("popupModal");
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+// Also close the modal when the Escape key is pressed
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    closeModal();
+  }
+});
+
+// Basic check that the phone number looks like a phone number.
+// Returning false stops the form from submitting.
+function validatePhoneForm() {
+  const phoneInput = document.getElementById("phone-number");
+  const digitsOnly = phoneInput.value.replace(/\D/g, ""); // strip non-digits
+
+  if (digitsOnly.length < 10) {
+    alert("Please enter a valid 10-digit phone number.");
+    phoneInput.focus();
+    return false;
+  }
+  return true;
+}
+
+/* ---------- 4. SCROLL REVEAL ---------- */
+
+// IntersectionObserver watches elements and tells us when they
+// scroll into view. We then add .visible, which CSS animates.
+const revealElements = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(
+  function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target); // animate once, then stop watching
+      }
+    });
+  },
+  { threshold: 0.15 } // fire when 15% of the element is visible
+);
+
+revealElements.forEach(function (el) {
+  observer.observe(el);
 });

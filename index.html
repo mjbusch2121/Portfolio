@@ -1,245 +1,365 @@
 <!doctype html>
 <html lang="en">
-  <!--HEAD-->
+  <!-- ============================================================
+       Michael Busch — Portfolio
+       Structure: NAV → HERO → ABOUT → SKILLS → PROJECTS → PHOTOGRAPHY → CONTACT → FOOTER
+       Styles live in CSS/style.css, behavior in JS/main.js
+       ============================================================ -->
 
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Michael Busch's Portfolio</title>
-    <link rel="stylesheet" type="text/css" href="CSS/style.css" />
+    <title>Michael Busch — Data Analyst in Progress</title>
+    <meta
+      name="description"
+      content="Michael Busch: 15+ years in fresh produce, now building data analytics skills with Excel, Python, and SQL. Customer Administrator at Westfalia Fruit."
+    />
+    <link rel="stylesheet" href="CSS/style.css?v=3" />
+
+    <!-- Fonts: Archivo (headings), Public Sans (body), IBM Plex Mono (data labels) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lato&family=Rubik&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
   </head>
 
-  <!--BODY-->
-
-  <body class="background">
-    <!--NAVBAR-->
+  <body>
+    <!-- ================= NAVBAR ================= -->
     <nav class="navbar">
+      <a class="brand" href="#home">MB<span class="brand-dot">.</span></a>
+
       <div class="navbar-links">
-        <a class="active" href="#home">HOME</a>
-        <a href="#about">ABOUT</a>
-        <a href="#explore">EXPLORE</a>
-        <a href="#contact">CONTACT</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#photography">Photography</a>
+        <a href="#contact">Contact</a>
       </div>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+
+      <button
+        class="theme-toggle"
+        onclick="toggleTheme()"
+        aria-label="Toggle dark mode"
+      >
         <span id="theme-icon">🌙</span>
       </button>
     </nav>
 
-    <!--BACKGROUND VIDEO-->
-    <header id="home">
-      <video autoplay muted loop playsinline id="fruit_veggie_video" aria-hidden="true">
-        <source src="images/video/fruit_veggie_video_compressed.mp4" type="video/mp4">
-        <!--DISPLAY MESSAGE IF VIDEO FAILS TO RUN-->
-        Your browser does not support HTML5 video.
-      </video>
+    <!-- ================= HERO ================= -->
+    <header class="hero" id="home">
+      <div class="hero-inner">
+        <!-- Small mono "eyebrow" line, like a dataset header -->
+        <p class="eyebrow">// portfolio of</p>
 
-      <!--VIDEO TEXT-->
-      <div class="video_text">
-        <h1 class="white-text">Michael Busch's Portfolio</h1>
-        <p class="center">
-          <q>The road goes on forever and the party never ends</q>
-          <br />-Robert Earl Keen
-          <br />
-          <br />
-          <q
-            >Be not afraid of growing slowly; be afraid only of standing
-            still.</q
-          >
-          <br />-Chinese Proverb
-          <br />
-          <br />Howdy, welcome to my portfolio page! Explore and get in touch if you would like to work together!
-          <br />
-          <br />Thank you for stopping by!
+        <h1>Michael Busch</h1>
+
+        <p class="hero-sub">
+          Fifteen years moving fresh produce. Now learning to move the data
+          behind it.
         </p>
+
+        <!-- SIGNATURE ELEMENT: the "data ledger" — his story as records -->
+        <div class="ledger" aria-label="Quick facts">
+          <div class="ledger-item">
+            <span class="ledger-key">industry</span>
+            <span class="ledger-value">Fresh produce · avocados</span>
+          </div>
+          <div class="ledger-item">
+            <span class="ledger-key">current_role</span>
+            <span class="ledger-value">Customer Admin, Westfalia Fruit</span>
+          </div>
+          <div class="ledger-item">
+            <span class="ledger-key">toolkit</span>
+            <span class="ledger-value">Excel · Python · SQL</span>
+          </div>
+          <div class="ledger-item">
+            <span class="ledger-key">base</span>
+            <span class="ledger-value">Pacific Northwest, USA</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#projects">See my work</a>
+          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+        </div>
       </div>
     </header>
 
-    <!--ABOUT SECTION-->
     <main>
-      <section class="row" id="about">
-        <!--LEFT COLUMN-->
-        <div class="column_2">
-          <img
-            src="images/avocado.jpg"
-            alt="avocado"
-          />
-        </div>
-        <!--RIGHT COLUMN-->
-        <div class="column_1">
-          <h1>About</h1>
-          <p>
-            I recently completed The Tech Academy's AI Software Developer Bootcamp, building a strong foundation in HTML, CSS, JavaScript, and Python, with a continued focus on Python and SQL for data analytics — a learning journey that is far from over. In my current role at Westfalia Fruit, I am actively applying these technical skills to real-world challenges in the agriculture industry, uncovering insights, improving operations, and supporting smarter decision-making. My goal is to blend 18 years of retail and 7 years of wholesale produce sales experience with adaptable, data-driven problem-solving to support sustainable practices and strengthen the connection between growers, communities, and the food systems we all rely on.
-          </p>
-          <br />
-          <p>
-            I am also a golfer, runner, photographer, traveler, and live music
-            concert-goer!
-          </p>
-          <br />
-          <p>
-            I look forward to this learning journey and can’t wait to keep
-            growing, adapting, and exploring new possibilities wherever my
-            skills can make an impact.
-          </p>
+      <!-- ================= ABOUT ================= -->
+      <section class="section" id="about">
+        <p class="section-label">01 &mdash; about</p>
+        <div class="row">
+          <div class="col-media reveal">
+            <img
+              src="images/Headshot_Final_Product.png"
+              alt="Michael Busch headshot"
+            />
+          </div>
+          <div class="col-text reveal">
+            <h2>From the loading dock to the dashboard</h2>
+            <p>
+              I've spent the last 15 years focused on fresh produce — buying,
+              selling, and keeping product moving from grower to shelf. At
+              Westfalia Fruit I support the North American sales team, and
+              increasingly the questions I'm asked are data questions: pricing
+              trends, volumes, freight.
+            </p>
+            <p>
+              So I went back to school. I completed The Tech Academy's AI
+              Software Developer Bootcamp, building a foundation in Python, SQL,
+              HTML, CSS, and JavaScript, and I'm applying it daily — turning
+              spreadsheets and portal exports into insight the sales team can
+              act on.
+            </p>
+            <p>
+              Off the clock: golf, running, live music, and landscape
+              photography around the Pacific Northwest.
+            </p>
+          </div>
         </div>
       </section>
 
-      <!--EXPLORE SECTION-->
-      <section class="row" id="explore">
-        <!--LEFT COLUMN-->
-        <div class="column_1">
-          <h1>Explore</h1>
-          <p>
-            Explore my coding projects, professional network and photography
-            here:
-          </p>
-          <p class="center">
+      <!-- ================= SKILLS ================= -->
+      <section class="section section-alt" id="skills">
+        <p class="section-label">02 &mdash; skills</p>
+        <h2>What I work with</h2>
+
+        <div class="card-grid">
+          <div class="card reveal">
+            <h3>Excel &amp; Reporting</h3>
+            <p>
+              Advanced formulas, conditional formatting, Power Query refreshes,
+              and recurring dashboards built to survive fresh data every week.
+            </p>
+          </div>
+          <div class="card reveal">
+            <h3>Python</h3>
+            <p>
+              Data cleanup and automation — parsing PDFs, scripting workflows,
+              and small tools that remove repetitive work.
+            </p>
+          </div>
+          <div class="card reveal">
+            <h3>SQL</h3>
+            <p>
+              Querying and multi-table schema design in SQL Server — the next
+              big focus on my learning roadmap.
+            </p>
+          </div>
+          <div class="card reveal">
+            <h3>Produce Domain Knowledge</h3>
+            <p>
+              Pricing, supply chain, ERP systems, and customer portals — the
+              context that makes the numbers mean something.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PROJECTS ================= -->
+      <section class="section" id="projects">
+        <p class="section-label">03 &mdash; projects</p>
+        <h2>Projects</h2>
+        <p class="section-intro">
+          Case studies and builds will land here as they're finished.
+        </p>
+
+        <div class="card-grid">
+          <!-- HOW TO ADD A PROJECT LATER:
+               Copy the template below, remove the "card-empty" class,
+               fill in the title, description, and link. That's it. -->
+
+          <!-- Empty-state card: shows visitors work is coming -->
+          <div class="card card-empty reveal">
+            <span class="ledger-key">status</span>
+            <h3>First case study in progress</h3>
+            <p>
+              A data project drawn from real produce-industry problems is
+              underway. Check back soon, or find works-in-progress on GitHub.
+            </p>
             <a
+              class="card-link"
               href="https://github.com/mjbusch2121"
               target="_blank"
               rel="noopener noreferrer"
-              >GitHub</a
+              >Visit my GitHub &rarr;</a
             >
-            <br /><br />
-            <!--LinkedIn-->
+          </div>
+
+          <!-- PROJECT TEMPLATE (hidden). Duplicate, remove the "hidden"
+               attribute and the comment, then edit the content. -->
+          <div class="card reveal" hidden>
+            <span class="ledger-key">project</span>
+            <h3>Project title</h3>
+            <p>One or two sentences on what it does and what you learned.</p>
             <a
-              href="https://www.linkedin.com/in/mike-busch-0b343a34b/"
+              class="card-link"
+              href="#"
               target="_blank"
               rel="noopener noreferrer"
-              >LinkedIn</a
+              >View project &rarr;</a
             >
-            <br /><br />
-            <!-- Photography link -->
-            Need some wall art? Support the side hustle =>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PHOTOGRAPHY ================= -->
+      <section class="section section-alt" id="photography">
+        <p class="section-label">04 &mdash; photography</p>
+        <div class="row">
+          <div class="col-text reveal">
+            <h2>Buschwood Photography</h2>
+            <p>
+              Landscape photography from the Pacific Northwest and beyond —
+              bridges, byways, and the occasional peony. Fine art prints are
+              available through my SmugMug storefront.
+            </p>
             <a
+              class="btn btn-ghost"
               href="https://michaelbusch.smugmug.com"
               target="_blank"
               rel="noopener noreferrer"
-              >Click Here</a
+              >Browse prints</a
             >
-          </p>
-        </div>
-        <!--RIGHT COLUMN-->
-        <div class="column_2">
-          <!-- Slideshow container -->
-          <div class="slideshow-container">
-            <!-- Slide 1: GitHub -->
-            <div class="slide active">
-              <img src="images/git_hub.jpg" alt="GitHub Portfolio" />
-            </div>
-
-            <!-- Slide 2: St Johns Bridge -->
-            <div class="slide">
-              <img
-                src="images/St_Johns_Bridge_From_Forest_Park.jpg"
-                alt="St Johns Bridge from Forest Park"
-              />
-            </div>
-
-            <!-- Slide 3: Peony -->
-            <div class="slide">
-              <img src="images/Peony1.jpg" alt="Peony Flower" />
-            </div>
-
-            <!-- Slide 4: West Cascades -->
-            <div class="slide">
-              <img
-                src="images/West Cascades Scenic Byway.jpg"
-                alt="West Cascades Scenic Byway"
-              />
+          </div>
+          <div class="col-media reveal">
+            <!-- Simple fading slideshow — controlled by JS/main.js -->
+            <div class="slideshow-container">
+              <div class="slide active">
+                <img
+                  src="images/St_Johns_Bridge_From_Forest_Park.jpg"
+                  alt="St Johns Bridge from Forest Park"
+                />
+              </div>
+              <div class="slide">
+                <img src="images/Peony1.jpg" alt="Peony flower" />
+              </div>
+              <div class="slide">
+                <img
+                  src="images/West Cascades Scenic Byway.jpg"
+                  alt="West Cascades Scenic Byway"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!--CONTACT SECTION-->
-      <section class="row" id="contact">
-        <!--CONTACT LEFT COLUMN -->
-        <div class="column_2 column_tall">
-          <img src="images/Headshot_Final_Product.png" alt="Mike Busch Headshot" />
-        </div>
-        <!--CONTACT FORM, RIGHT COLUMN-->
-        <div class="column_1 column_tall">
-          <h1>Send a Message</h1>
+      <!-- ================= CONTACT ================= -->
+      <section class="section" id="contact">
+        <p class="section-label">05 &mdash; contact</p>
+        <div class="row">
+          <div class="col-text reveal">
+            <h2>Let's talk</h2>
+            <p>
+              Open to analyst-track opportunities, produce-industry data
+              conversations, and print inquiries. You can also find me here:
+            </p>
+            <ul class="link-list">
+              <li>
+                <a
+                  href="https://github.com/mjbusch2121"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >GitHub</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/mike-busch-0b343a34b/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >LinkedIn</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://michaelbusch.smugmug.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >SmugMug</a
+                >
+              </li>
+            </ul>
+          </div>
 
-          <!--THIS SPECIFIES WHERE AND HOW TO SEND THE FORM DATA; WE ARE LEAVING IT BLANK-->
-          <form action="https://formspree.io/f/mvzzpdej" method="POST">
-            <!--HERE WE ARE UTILIZING A 3RD PARTY SERVICE TO SUBMIT THE FORM DATA, INSERT YOUR FORMSPREE ENDPOINT IN THE ACTION ATTRIBUTE-->
-            <label for="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="Name"
-              placeholder=" Please enter your name here"
-              required
-            />
-            <label for="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="Email"
-              placeholder="Please enter your email here"
-              required
-            />
-            <label for="message">Message:</label>
-            <textarea
-              id="message"
-              name="Message"
-              rows="4"
-              placeholder="Please write your message here"
-              required
-            ></textarea>
-            <input type="submit" value="SUBMIT" />
-          </form>
+          <div class="col-text reveal">
+            <!-- Formspree handles delivery — same endpoint as before -->
+            <form action="https://formspree.io/f/mvzzpdej" method="POST">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="Name"
+                placeholder="Your name"
+                required
+              />
+
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="Email"
+                placeholder="you@example.com"
+                required
+              />
+
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="Message"
+                rows="5"
+                placeholder="What can I help with?"
+                required
+              ></textarea>
+
+              <button type="submit" class="btn btn-solid">Send message</button>
+            </form>
+          </div>
         </div>
       </section>
     </main>
 
-    <!--FOOTER SECTION-->
+    <!-- ================= FOOTER ================= -->
     <footer>
-      <p>&copy; Michael Busch 2026</p>
+      <p>&copy; Michael Busch 2026 &mdash; built by hand, refreshed often.</p>
     </footer>
-    <!-- FLOATING CONTACT BUTTON -->
+
+    <!-- Floating "request a call" button -->
     <button class="popup-trigger-btn" onclick="openModal()">
-      Prefer a Phone Call?
+      Prefer a phone call?
     </button>
 
-    <!-- POPUP MODAL -->
-    <div id="popupModal" class="modal">
-      <!-- Modal overlay background (click to close) -->
+    <!-- ================= CALLBACK MODAL ================= -->
+    <div id="popupModal" class="modal" aria-hidden="true">
       <div class="modal-overlay" onclick="closeModal()"></div>
 
-      <!-- Modal content box -->
-      <div class="modal-content">
-        <!-- Close button X -->
-        <span class="close-btn" onclick="closeModal()">&times;</span>
+      <div class="modal-content" role="dialog" aria-labelledby="modal-title">
+        <button class="close-btn" onclick="closeModal()" aria-label="Close">
+          &times;
+        </button>
 
-        <!-- Modal header -->
-        <h2>Request a Call Back</h2>
+        <h2 id="modal-title">Request a call back</h2>
 
-        <!-- Phone callback form inside modal -->
         <form
           id="phoneForm"
           action="https://formspree.io/f/mvzzpdej"
           method="POST"
           onsubmit="return validatePhoneForm();"
         >
-          <!--Name field for phone form-->
-          <label for="phone-name">Name:</label>
+          <label for="phone-name">Name</label>
           <input
             type="text"
             id="phone-name"
             name="phone-name"
-            placeholder="Please Enter Your Name"
+            placeholder="Your name"
             required
           />
 
-          <!--Phone Number Field-->
-          <label for="phone-number">Phone Number:</label>
+          <label for="phone-number">Phone number</label>
           <input
             type="tel"
             id="phone-number"
@@ -248,23 +368,20 @@
             required
           />
 
-          <!--Best time to call field-->
-          <label for="call-time">Best Time to Call:</label>
+          <label for="call-time">Best time to call</label>
           <select id="call-time" name="call-time" required>
-            <option value="">-- Select Time --</option>
-            <option value="morning">Morning (9am-12pm)</option>
-            <option value="afternoon">Afternoon (12pm-5pm)</option>
-            <option value="evening">Evening (5pm-8pm)</option>
+            <option value="">-- Select time --</option>
+            <option value="morning">Morning (9am–12pm)</option>
+            <option value="afternoon">Afternoon (12pm–5pm)</option>
+            <option value="evening">Evening (5pm–8pm)</option>
           </select>
 
-          <!--Submit Button-->
-          <input type="submit" value="REQUEST CALLBACK" />
+          <button type="submit" class="btn btn-solid">Request callback</button>
         </form>
       </div>
     </div>
-    <!-- END POPUP MODAL -->
 
-    <!--JavaScript-->
+    <!-- Behavior: theme toggle, slideshow, modal, scroll reveal -->
     <script src="JS/main.js"></script>
   </body>
 </html>

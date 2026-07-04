@@ -1,908 +1,562 @@
-/*COLOR VARIABLES FOR LIGHT/DARK MODE*/
+/* ============================================================
+   Michael Busch — Portfolio Stylesheet
+   Organized top to bottom:
+   1. Design tokens (colors, fonts) — change the look here
+   2. Base / reset
+   3. Navbar
+   4. Hero + the "data ledger"
+   5. Sections, rows, cards
+   6. Forms & buttons
+   7. Slideshow
+   8. Modal
+   9. Footer & floating button
+   10. Scroll-reveal animation
+   11. Responsive (mobile) rules
+   ============================================================ */
+
+/* ---------- 1. DESIGN TOKENS ---------- */
+/* Light theme (default). Every color used on the page comes
+   from these variables, so a redesign is a 10-line edit. */
 :root {
-  /* Light Mode Colors (Default) */
-  --bg-primary: #f5fbef;
-  --bg-secondary: #f2f2f2;
-  --bg-tertiary: #f9f9f9;
-  --color-green-dark: #577A30;
-  --color-yellow: #f4ef88;
-  --color-accent: #c3d9c4;
-  --text-primary: black;
-  --text-secondary: white;
-  --border-primary: black;
-  --border-secondary: #ccc;
-  --shadow-primary: rgba(0, 0, 0, 0.3);
-  --shadow-secondary: rgba(0, 0, 0, 0.2);
-  --shadow-blue: #00004d;
-  --outline-focus: white;
+  --paper: #f7f6f1;        /* page background — warm off-white */
+  --surface: #ffffff;      /* cards, form fields */
+  --ink: #1c2a21;          /* main text — deep evergreen */
+  --ink-soft: #4c584f;     /* secondary text */
+  --leaf: #55803c;         /* accent — avocado leaf green */
+  --leaf-dark: #3f6129;    /* accent hover state */
+  --line: #dde3d5;         /* borders and dividers */
+
+  --font-display: "Archivo", sans-serif;     /* headings */
+  --font-body: "Public Sans", sans-serif;    /* paragraphs */
+  --font-mono: "IBM Plex Mono", monospace;   /* labels, data bits */
 }
 
-/* Dark Mode Colors */
-[data-theme="dark"] {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #2d2d2d;
-  --bg-tertiary: #3a3a3a;
-  --color-green-dark: #577A30; /* Keeping original green for brand consistency */
-  --color-yellow: #d4c976;
-  --color-accent: #4a5c3e;
-  --text-primary: #e0e0e0;
-  --text-secondary: #f5f5f5;
-  --border-primary: #555;
-  --border-secondary: #666;
-  --shadow-primary: rgba(0, 0, 0, 0.6);
-  --shadow-secondary: rgba(0, 0, 0, 0.4);
-  --shadow-blue: #4a7ba7;
-  --outline-focus: #577A30; /* Using original green for focus states too */
+/* Dark theme — applied when JS adds .dark-mode to <body> */
+body.dark-mode {
+  --paper: #141a15;
+  --surface: #1c2420;
+  --ink: #e8ece5;
+  --ink-soft: #a7b3a8;
+  --leaf: #8fbf6a;
+  --leaf-dark: #a9d486;
+  --line: #2c362e;
 }
 
-/*GENERAL STYLING*/
+/* ---------- 2. BASE ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-/*BODY STYLING*/
+html {
+  scroll-behavior: smooth;
+  /* keeps section headings from hiding under the sticky navbar */
+  scroll-padding-top: 5rem;
+}
+
 body {
-  margin: 0; /*This ensures our site displays all the way to the edge of the browser screen*/
-  background-color: var(--bg-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Heading 1 elements */
-h1 {
-  text-transform: uppercase; /* Capitalizing all h1 headings */
-  font-family:
-    "Lato", sans-serif; /*sets font for all H1 headings, font imported from fonts.google.com*/
-  text-align: center; /* Centering all h1 elements */
-  margin-top: 2rem; /* Adds a small margin above h1 elements */
-  color: var(--text-primary); /* Default text color */
-  font-size: calc(
-    1.2rem + 1.5vw
-  ); /* Scales from ~31px on desktop to ~23px on mobile. */
-  transition: all 0.4s ease; /* Smooth transition for hover effects */
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: 10px;
 }
 
-/* Make headings "pop" with scale and shadow */
-h1:hover {
-  transform: scale(1.1) translateY(-3px); /* Larger scale + slight lift */
-  /* Layered shadows create depth and make text pop out from background */
-  text-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.3),        /* Main drop shadow */
-    0 8px 16px rgba(0, 0, 0, 0.2),       /* Deeper shadow for more depth */
-    0 0 30px rgba(255, 255, 255, 0.5);   /* Subtle white glow for contrast */
-  letter-spacing: 1px; /* Slightly expands text for emphasis */
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bouncy effect */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
-
-h1:focus {
-  transform: scale(1.1) translateY(-3px);
-  text-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.3),
-    0 8px 16px rgba(0, 0, 0, 0.2),
-    0 0 30px rgba(255, 255, 255, 0.5);
-  letter-spacing: 1px;
-  outline: 2px solid var(--outline-focus); /* Outline adapts to theme */
-  outline-offset: 5px;
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-/* Styling for portfolio title text */
-.white-text {
-  color: var(--text-primary); /* Adapts to theme: black in light mode, light gray in dark mode */
-  font-size: min(
-    calc(1.5rem + 2vw),
-    4rem
-  ); /* Prevents title from getting too huge on large screens */
-  padding: 0 0.5rem; /* Prevents text from touching edges */
-  word-wrap: break-word; /* Allows text to wrap if needed */
-}
-
-/* Paragraph elements */
-p {
-  font-family: "Rubik", sans-serif; /*Rubik from fonts.google.com*/
-  text-align: left; /* Justify text within paragraph elements */
-  letter-spacing: 0.5px; /* This expands the text slightly */
-  font-size: clamp(1rem, 2.5vw, 1.1rem); /* Scales from 1rem on mobile to 1.1rem on desktop */
-  margin: 0 0 1rem 0;
-  padding: 0 1rem;
-  color: var(--text-primary);
-  transition: color 0.3s ease;
-}
-
-/* Center class - this applies to all elements with the class "center" */
-.center {
-  text-align: center; /* This center aligns the text */
-  margin-bottom: 1.5rem;
-}
-
-/* Anchor elements */
 a {
-  color: var(--text-primary); /* This ensures all links are colored */
+  color: var(--leaf);
   text-decoration: none;
 }
+
 a:hover {
+  color: var(--leaf-dark);
   text-decoration: underline;
 }
-a:focus {
-  outline: 2px solid var(--color-green-dark); /* Green outline for focused links */
+
+/* Visible keyboard focus everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--leaf);
   outline-offset: 2px;
-  text-decoration: underline;
 }
 
-/* Quotation elements */
-q {
-  font-style: italic;
-}
-
-/* Image elements */
-img {
-  border-radius: 8px; /* Gives all images slightly rounded corners */
-  max-width: 100%; /* Ensures all images stay within the width of their container */
-  height: auto; /* Sets the height of all images */
-  display: block; /* By specifying block display we can ensure our images are able to be centered */
-  margin: 0 auto;
-  margin-top: 0;
-}
-
-/* Image element hover effects */
-img:hover {
-  filter: grayscale(0%);
-  transition: transform 0.3s ease;
-  transform: scale(1.03);
-}
-
-/* The @media rule is used in media queries to apply different styles for different media/types of devices */
-/* On screens 576px and smaller the images will be 100px tall and centered vertically in the column */
-@media screen and (max-width: 576px) {
-  img {
-    height: auto;
-    margin-top: 1rem;
-  }
-}
-
-/* Styling for footer element */
-footer {
-  padding: 1.5rem 0; /* This gives the footer padding that is equal to 2% of the width of the element's area */
-  background-color: var(--color-yellow);
-  text-align: center;
-  border-top: 4px solid var(--border-primary);
-}
-footer p {
-  margin: 0;
-  text-align: center;
-}
-
-/* FADE ANIMATION */
-/* DEFINE THE FADE-IN ANIMATION */
-@keyframes fadeIn {
-  from {
-    opacity: 0; /* Start invisible */
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1; /* End fully visible */
-    transform: translateY(0); /* End at normal position */
-  }
-}
-
-/* Stagger the sections with delays */
-#about {
-  animation-delay: 0.2s; /* About section fades in first */
-}
-
-#explore {
-  animation-delay: 0.4s; /* Section fades in second */
-}
-
-#contact {
-  animation-delay: 0.6s; /* Section fades in last */
-}
-/***** END OF GENERAL STYLING *****/
-
-/***** NAVBAR STYLING *****/
+/* ---------- 3. NAVBAR ---------- */
 .navbar {
-  display: flex;
-  background-color: var(--color-yellow);
-  position: fixed;
+  position: sticky;
   top: 0;
-  width: 100%;
-  z-index: 10;
-  padding: 0.5rem;
-  animation: fadeIn 0.8s ease-out; /* Navbar fades in quickly*/
-  justify-content: space-between;
+  z-index: 100;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 5vw;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
 }
 
-/* Navbar links container */
+.brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--ink);
+}
+
+.brand:hover {
+  text-decoration: none;
+}
+
+.brand-dot {
+  color: var(--leaf);
+}
+
 .navbar-links {
   display: flex;
-  gap: 0;
+  gap: 1.75rem;
 }
 
-/* Navbar links */
-.navbar a {
-  color: var(--text-primary); /* This is the font color for text on our navbar */
-  padding: 0.75rem 1rem; /* This adds padding around our text */
-  text-decoration: none; /* This gets rid of the underlines under the text on our navbar */
-  font-family:
-    "Lato", sans-serif; /* This specifies the font family for text on our navbar */
-  font-size: 1rem; /* This specifies the font size for text on our navbar */
-  text-align: center; /* This centers the text within its container */
+.navbar-links a {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  text-transform: lowercase;
 }
 
-/* Screens 576px and smaller will display navbar links equally distributed */
-@media screen and (max-width: 576px) {
-  .navbar a {
-    width: 25%; /* This makes each link take up 1/4 of the navbar */
-    font-size: 0.75rem;
-  }
+.navbar-links a:hover {
+  color: var(--leaf);
+  text-decoration: none;
 }
 
-/* Navbar hover effects */
-.navbar a:hover {
-  background-color: var(--color-green-dark); /* Defines the background color that will display when you hover over the link */
-  color: var(--text-secondary); /* This defines the font color that will display when navbar a elements are hovered over */
-}
-
-.navbar a:focus {
-  background-color: var(--color-accent);
-  color: var(--text-primary);
-  outline: 2px solid var(--color-green-dark);
-  outline-offset: -2px; /* Inset outline so it stays within the navbar */
-}
-
-/* Dark Mode Toggle Button */
 .theme-toggle {
   background: none;
-  border: 2px solid var(--text-primary);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 1rem;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-  margin-left: auto;
-  color: var(--text-primary);
 }
 
-.theme-toggle:hover {
-  background-color: var(--color-green-dark);
-  color: var(--text-secondary);
-  transform: rotate(20deg) scale(1.1);
+/* ---------- 4. HERO ---------- */
+.hero {
+  padding: 7rem 5vw 5rem;
+  /* faint grid — a quiet nod to spreadsheets */
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  border-bottom: 1px solid var(--line);
 }
 
-.theme-toggle:focus {
-  outline: 2px solid var(--color-green-dark);
-  outline-offset: 2px;
+.hero-inner {
+  max-width: 860px;
+  margin: 0 auto;
 }
 
-/* Mobile responsive adjustments for theme toggle */
-@media screen and (max-width: 576px) {
-  .theme-toggle {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
-  }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--leaf);
+  margin-bottom: 0.75rem;
 }
-/***** END OF NAVBAR STYLING *****/
 
-/***** VIDEO STYLING *****/
-/*Formatting for background video*/
+.hero h1 {
+  font-size: clamp(2.6rem, 7vw, 4.5rem);
+  font-weight: 800;
+}
 
-#home {
-  position: relative;
-  height: 450px;
+.hero-sub {
+  font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+  color: var(--ink-soft);
+  max-width: 34ch;
+  margin: 1.25rem 0 2.25rem;
+}
+
+/* The signature "data ledger" */
+.ledger {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1px;                       /* thin gaps become hairlines */
+  background: var(--line);        /* ...because this shows through */
+  border: 1px solid var(--line);
+  border-radius: 12px;
   overflow: hidden;
-  margin-top: 3rem; /* creates space below navbar so video doesn't start behind it */
-  background-color: var(--color-green-dark); /* Fallback background color if video doesn't load */
+  margin-bottom: 2.25rem;
 }
 
-/* Make video section responsive on tablets and smaller */
-@media screen and (max-width: 768px) {
-  #home {
-    height: 350px; /* smaller on tablets */
-    margin-top: 2.5rem; /* Less top margin on smaller screens */
-  }
+.ledger-item {
+  background: var(--surface);
+  padding: 1rem 1.1rem;
 }
 
-@media screen and (max-width: 576px) {
-  #home {
-    min-height: 400px; /* Changed from height to min-height, increased size */
-    height: auto; /* Allows section to grow if needed */
-    margin-top: 2rem;
-  }
+.ledger-key {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--leaf);
+  margin-bottom: 0.3rem;
 }
 
-#fruit_veggie_video {
-  position: absolute; /* This fixes the video to the page */
-  top: 0;
-  left: 0;
-  right: 0; /* This ensures there is no space between the edge of the video and the edge of the page */
-  bottom: 0; /* This ensures no space between the bottom of the video and the bottom of the page */
-  min-width: 100%; /* This ensures the video is displayed across the full width of the page */
-  min-height: 100%;
-  object-fit: cover;
-  z-index: 1; /* Video layer */
+.ledger-key::before {
+  content: "> ";
 }
 
-/* Video now displays on all screen sizes including mobile */
-
-/* Texts over the video */
-.video_text {
-  background: rgba(0, 0, 0, 0.2);
-  color: white;
-  width: 100%;
-  padding: 1.5rem 1rem;
-  position: absolute;
-  top: 0; /* starts at the top */
-  bottom: 0; /* stretches to the bottom */
-  display: flex; /* helps with centering content */
-  flex-direction: column; /* stacks content vertically */
-  justify-content: center; /* centers content vertically */
-  z-index: 2; /* Text appears above video */
-  animation: fadeIn 1.2s ease-out; /* Smooth entrance for the hero text */
+.ledger-value {
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
-/* Video text paragraph styling - bold and bigger */
-.video_text p {
-  font-weight: bold; /* Makes text bold */
-  font-size: clamp(1.1rem, 3vw, 1.3rem); /* Bigger text that scales responsively */
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-/***** END OF VIDEO STYLING *****/
-
-/***** TABLE STYLING -  this section covers the styling of the columns and rows within the table *****/
-* {
-  /* The asterisk is a universal selector that applies this effect to all elements on the page */
-  box-sizing: border-box; /* This creates a box with a border within which we will place most of our text */
+/* ---------- 5. SECTIONS, ROWS, CARDS ---------- */
+.section {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 4.5rem 5vw;
 }
 
-/* This inserts something after the content of selected elements (in this case the elements with class "row") */
+/* Alternate band: full-width tint behind the content */
+.section-alt {
+  max-width: none;
+  background: color-mix(in srgb, var(--leaf) 6%, var(--paper));
+}
+
+.section-alt > * {
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--leaf);
+  text-transform: lowercase;
+  margin-bottom: 0.75rem;
+}
+
+.section h2 {
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  margin-bottom: 1.25rem;
+}
+
+.section-intro {
+  color: var(--ink-soft);
+  margin-bottom: 2rem;
+}
+
 .row {
   display: flex;
-  flex-wrap: wrap;
-  animation: fadeIn 1s ease-out; 
-  animation-fill-mode: both; 
-}
-.column_1,
-.column_2 {
-  width: 50%; /* This ensures the column takes up half of the page width */
-  padding: 1rem;
-  min-height: 250px;
-}
-.column_1 {
-  background-color: var(--color-green-dark);
-}
-
-.column_2 {
-  background-color: var(--color-yellow);
-}
-
-#explore .column_1 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 1rem;
-  padding: 2rem;
-  text-align: center;
-}
-#explore .column_2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 3rem;
 }
 
-#explore a {
-  font-weight: bold;
-  color: var(--text-primary);
-  text-decoration: underline;
+.col-text {
+  flex: 1.2;
 }
 
-#explore a:hover {
-  color: var(--text-primary);
+.col-text p {
+  margin-bottom: 1rem;
 }
-/* SLIDESHOW STYLING */
-/* Container for the slideshow */
-.slideshow-container {
-  position: relative; /* Allows slides to stack on top of each other */
+
+.col-media {
+  flex: 1;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(28, 42, 33, 0.08);
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.6rem;
+}
+
+.card p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* Empty-state project card: dashed border says "coming soon" */
+.card-empty {
+  border-style: dashed;
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.link-list {
+  list-style: none;
+}
+
+.link-list li {
+  margin-bottom: 0.6rem;
+  font-family: var(--font-mono);
+}
+
+/* ---------- 6. FORMS & BUTTONS ---------- */
+form label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin: 1rem 0 0.35rem;
+}
+
+form input,
+form textarea,
+form select {
   width: 100%;
-  height: 100%;
-  overflow: hidden; /* Hides slides that are sliding out of view */
-}
-
-/* Individual slide styling */
-.slide {
-  position: absolute; /* Stacks all slides in the same position */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0; /* Starts invisible */
-  transform: translateX(100%); /* Starts off-screen to the right */
-  transition: transform 1s ease, opacity 1s ease; /* 1-second slide and fade transition */
-}
-
-/* Active slide (the one currently showing) */
-.slide.active {
-  opacity: 1; /* Fully visible */
-  transform: translateX(0); /* Centered in view */
-  z-index: 2; /* Appears above other slides */
-}
-
-/* Images inside slides */
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures images fill the container while maintaining aspect ratio */
-  object-position: center; /* Centers the image within the crop */
-}
-
-/* Target the image specifically in the about section's column_2 */
-#about .column_2 {
-  overflow: hidden;
-  position: relative; /* Allows absolutely positioned image inside */
-}
-
-#about .column_2 img {
-  position: absolute; /* Removes image from document flow so it can't stretch the column */
-  top: 1rem;
-  left: 1rem;
-  right: 1rem;
-  bottom: 1rem;
-  width: calc(100% - 2rem);
-  height: calc(100% - 2rem);
-  object-fit: cover;
-  object-position: center;
-  margin: 0;
+  padding: 0.7rem 0.85rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 8px;
 }
 
-#about .column_1 {
-  text-align: center; /* centers all text inside this column */
+form input:focus,
+form textarea:focus,
+form select:focus {
+  border-color: var(--leaf);
 }
 
-#about .column_1 p {
-  padding: 0 1rem; /* optional: keeps your readable side‑padding */
-  text-align: center;
+form button {
+  margin-top: 1.25rem;
 }
 
-#contact .column_2 img {
-  width: 100%; /* Image fills full width of container */
-  height: 100%; /* Image fills full height of container */
-  object-fit: cover; /* Crops image to fill space while maintaining aspect ratio */
-  object-position: center; /* Centers the image within the crop area */
-  margin: 0; /* Removes the default margin */
-  border-radius: 8px; /* Keeps the rounded corners */
-}
-
-/* This class is applied to the columns in the final row, overriding the height and padding to provide more room for the contact form  while keeping the rest of the formatting from Column_1 or Column_2 */
-.column_tall {
-  padding-top: 0%;
-}
-
-#contact .column_2 {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  padding: 1.5rem;
-}
-
-#contact .column_1 {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  padding: 1.5rem;
-}
-
-/* Remove top margin from h1 in contact section for better alignment */
-#contact h1 {
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-}
-
-/* MOBILE RESPONSIVENESS: Screens 576px and smaller */
-@media screen and (max-width: 576px) {
-  .column_1,
-  .column_2 {
-    width: 100%; /* Stack columns vertically on mobile */
-  }
-
-  /* MOBILE FIX: Reduce form padding on small screens for better space usage */
-  form {
-    padding: 1.5rem;
-  }
-
-  /* MOBILE FIX: Larger touch targets for better mobile usability */
-  .navbar a {
-    padding: 1rem 0.75rem; /* Increased vertical padding for easier tapping */
-    min-height: 44px; /* Ensures minimum touch target size of 44px (Apple's recommendation) */
-  }
-
-  /* MOBILE FIX: Better spacing for form labels on mobile */
-  label {
-    margin-top: 0.5rem;
-    display: block;
-  }
-
-  /* MOBILE FIX: Better video text spacing and sizing */
-  .video_text {
-    padding: 2rem 1rem; /* More vertical padding */
-  }
-
-  .video_text p {
-    font-size: 0.8rem; /* Slightly smaller but still readable */
-    line-height: 1.6; /* Better line spacing */
-  }
-
-  .white-text {
-    font-size: 1.7rem; /* Ensure title is readable but fits */
-  }
-}
-
-/***** END OF TABLE STYLING *****/
-
-/* TABLET BREAKPOINT: Better responsiveness for medium screens (tablets in portrait) */
-@media screen and (min-width: 577px) and (max-width: 768px) {
-  /* Slightly reduce column padding on tablets for better content fit */
-  .column_1,
-  .column_2 {
-    padding: 1.5rem;
-  }
-
-  /* Scale headings appropriately on tablets */
-  h1 {
-    font-size: calc(1.3rem + 1.2vw);
-  }
-
-  /* Adjust form padding for tablets */
-  form {
-    padding: 1.75rem;
-  }
-}
-
-/***** CONTACT FORM STYLING *****/
-
-/* Label styling for all forms */
-label {
-  color: var(--text-primary);
-  transition: color 0.3s ease;
-  font-family: "Lato", sans-serif;
-}
-
-/* input[type=text] targets all text input sections of the contact form */
-input[type="text"] {
-  width: 100%; /* Each input box covers the full width of the container */
-  padding: 12px; /* Adds padding within the text box */
-  border: 1px solid var(--border-secondary); /* Setting a solid border and its color */
-  border-radius: 4px; /* Slightly rounds the corners of the text box border */
-  box-sizing: border-box; /* This creates a box with a border around the contact form input boxes */
-  margin-top: 6px; /* Adds a margin to the top of the text box */
-  margin-bottom: 16px; /* Adds a margin to the bottom of the text box */
-  resize: vertical; /* This allows the user to resize the text boxes vertically */
-  font-family: "Rubik", sans-serif;
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-/* Hover effects for input boxes */
-input[type="text"]:hover {
-  box-shadow: 0 0 5px #00004d inset; /* This creates a blue shadow in the text box when hovered over by the user */
-}
-
-/* ACCESSIBILITY FIX: Focus state for text inputs for keyboard navigation */
-input[type="text"]:focus {
-  outline: 2px solid var(--color-green-dark); /* Green outline matches your color scheme */
-  outline-offset: 2px;
-  box-shadow: 0 0 5px rgba(87, 122, 48, 0.3); /* Subtle green glow */
-}
-
-/* Submit button */
-input[type="submit"] {
-  background-color: black; /* Sets the background color of the submit button to black */
-  color: white; /* Sets the font color of the Submit button to white */
-  font-weight: bold; /* Makes the font of the submit button bold */
-  padding: 12px 20px; /* Adds padding to the submit button */
-  border: none; /* Removes the border from the submit button */
-  border-radius: 4px; /* Gives the submit button the same rounded corners as the text boxes */
-  cursor: pointer; /* Changes the cursor to pointer when over the submit button */
-  display: block; /* Allows the submit button to be centered */
-  margin-left: auto; /* In combination with "margin-right: auto" this will center the submit button */
-  margin-right: auto;
-  font-family: "Lato", sans-serif;
-  margin-bottom: 1rem;
-}
-
-/* Hover effect for submit button */
-input[type="submit"]:hover {
-  background-color: var(--color-accent); /* Turns the background of the submit button white when the user hovers over it */
-  color: black; /* Turns the font black when hovered over */
-  transform: scale(1.05); /* Makes the button increase 1.5 times in size */
-  transition: transform 0.3s ease; /* Makes the transform effect last 1.5 seconds */
-}
-
-input[type="submit"]:focus {
-  outline: 3px solid var(--color-green-dark);
-  outline-offset: 3px;
-}
-
-/* Form element */
-form {
-  border-radius: 5px; /* Rounds the corners of the contact form */
-  background-color: var(--bg-secondary);
-  padding: 2rem; /* Adds padding to the contact form */
-  font-family: "Lato", sans-serif;
-}
-/* PHONE FORM STYLING */
-.phone-form-container {
-  margin-bottom: 2rem; /* space between phone form and main form */
-}
-/* Heading for phone form */
-.phone-form-container h3 {
-  font-family: "Lato", sans-serif;
-  color: var(--text-primary);
-  text-align: center;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-}
-/* Style the phone form */
-#phoneForm {
-  border-radius: 5px;
-  background-color: var(--bg-tertiary); /* Slightly different color than main form */
-  padding: 1.5rem;
-  font-family: "Lato", sans-serif;
-  border: 2px solid var(--color-accent); /* Adds a subtle border to distinguish it */
-}
-
-/* Phone number input field */
-input[type="tel"] {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border-secondary);
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  font-family: "Rubik", sans-serif;
-  font-size: 1rem;
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-/* Hover effect for phone input */
-input[type="tel"]:hover {
-  box-shadow: 0 0 5px #00004d inset;
-}
-
-input[type="tel"]:focus {
-  outline: 2px solid var(--color-green-dark);
-  outline-offset: 2px;
-  box-shadow: 0 0 5px rgba(87, 122, 48, 0.3);
-}
-
-/* Style the select dropdown */
-select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border-secondary);
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  font-family: "Rubik", sans-serif;
-  font-size: 1rem;
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  border: 1px solid var(--leaf);
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
-/* Hover effect for dropdown */
-select:hover {
-  box-shadow: 0 0 5px #00004d inset;
+.btn:hover {
+  text-decoration: none;
 }
 
-select:focus {
-  outline: 2px solid var(--color-green-dark);
-  outline-offset: 2px;
-  box-shadow: 0 0 5px rgba(87, 122, 48, 0.3);
-}
-/***** END OF CONTACT FORM STYLING *****/
-
-/***** POPUP MODAL STYLING *****/
-/* Floating trigger button - appears in bottom right corner */
-.popup-trigger-btn {
-  position: fixed; /* Stays in place when scrolling */
-  bottom: 2rem; /* 2rem from bottom of screen */
-  right: 2rem; /* 2rem from right of screen */
-  background-color: var(--color-green-dark);
-  color: var(--text-secondary); /* Adapts to theme */
-  border: none;
-  padding: 1rem 1.5rem;
-  border-radius: 50px; /* Rounded pill shape */
-  font-family: "Lato", sans-serif;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  box-shadow: 0 4px 10px var(--shadow-primary); /* Shadow adapts to theme */
-  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-  z-index: 999; /* Appears above most content */
+.btn-solid {
+  background: var(--leaf);
+  color: #ffffff;
 }
 
-/* Floating button hover effect */
-.popup-trigger-btn:hover {
-  background-color: var(--color-yellow); /* Changes to your tan/gold color on hover */
-  color: var(--text-primary); /* Adapts text color for theme */
-  transform: scale(1.05); /* Slight grow on hover */
+.btn-solid:hover {
+  background: var(--leaf-dark);
+  color: #ffffff;
 }
 
-.popup-trigger-btn:focus {
-  outline: 3px solid var(--outline-focus);
-  outline-offset: 2px;
-  background-color: var(--color-yellow);
-  color: var(--text-primary);
+body.dark-mode .btn-solid {
+  color: #141a15; /* dark text on the bright green in dark mode */
 }
 
-/* Modal container - hidden by default */
-.modal {
-  display: none; /* Hidden until opened */
-  position: fixed;
-  z-index: 1000; /* Above everything including floating button */
-  left: 0;
-  top: 0;
+.btn-ghost {
+  background: transparent;
+  color: var(--leaf);
+}
+
+.btn-ghost:hover {
+  background: color-mix(in srgb, var(--leaf) 12%, transparent);
+  color: var(--leaf-dark);
+}
+
+/* ---------- 7. SLIDESHOW ---------- */
+.slideshow-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.slide img {
   width: 100%;
   height: 100%;
-  animation: fadeIn 0.3s ease-out; /* Uses your existing fadeIn animation */
+  object-fit: cover;
+  border-radius: 0;
 }
 
-/* Dark overlay background behind modal */
+.slide.active {
+  opacity: 1;
+}
+
+/* ---------- 8. MODAL ---------- */
+.modal {
+  display: none;           /* JS switches this to flex */
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.open {
+  display: flex;
+}
+
 .modal-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
-  cursor: pointer; /* Shows user can click to close */
+  inset: 0;
+  background: rgba(20, 26, 21, 0.55);
 }
 
-/* Modal content box - the white popup */
 .modal-content {
-  position: relative; /* Positioned above the overlay */
-  background-color: var(--bg-primary);
-  margin: 5% auto; /* Centered horizontally, 5% from top */
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
   padding: 2rem;
-  border: 3px solid var(--color-accent); /* Border in your accent color */
-  border-radius: 8px; /* Rounded corners like your images */
-  width: 90%;
-  max-width: 500px; /* Max width on larger screens */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Shadow for depth */
-  animation: slideDown 0.3s ease-out; /* Smooth entrance animation */
+  width: min(92vw, 420px);
 }
 
-/* Slide down animation for modal appearance */
-@keyframes slideDown {
-  from {
-    transform: translateY(-50px); /* Starts 50px higher */
-    opacity: 0; /* Starts invisible */
-  }
-  to {
-    transform: translateY(0); /* Ends at normal position */
-    opacity: 1; /* Fully visible */
-  }
-}
-
-/* Close button (X) in top right */
 .close-btn {
-  color: var(--text-primary);
-  float: right; /* Positioned in top right */
-  font-size: 2rem;
-  font-weight: bold;
-  line-height: 1;
+  position: absolute;
+  top: 0.6rem;
+  right: 0.9rem;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--ink-soft);
   cursor: pointer;
-  transition: color 0.3s ease;
-  /* ACCESSIBILITY FIX: Add padding for larger touch target */
-  padding: 0.5rem;
-  margin: -0.5rem; /* Negative margin to maintain visual position */
 }
 
-.close-btn:hover {
-  color: var(--text-primary); /* Darkens on hover */
-}
-
-/* ACCESSIBILITY FIX: Focus state for close button */
-.close-btn:focus {
-  outline: 2px solid var(--color-green-dark);
-  outline-offset: 2px;
-  color: var(--text-primary);
-}
-
-/* Modal heading */
-.modal-content h2 {
-  font-family: "Lato", sans-serif;
-  color: var(--text-primary);
+/* ---------- 9. FOOTER & FLOATING BUTTON ---------- */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 2rem 5vw;
   text-align: center;
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
 }
 
-/* Popup form styling */
-#popupForm {
-  border-radius: 5px;
-  background-color: var(--bg-secondary);
-  padding: 1.5rem;
-  font-family: "Lato", sans-serif;
+.popup-trigger-btn {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 150;
+  padding: 0.7rem 1.1rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--leaf);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(28, 42, 33, 0.25);
 }
 
-/* Textarea for message field - new element type */
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border-secondary);
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  font-family: "Rubik", sans-serif;
-  font-size: 1rem;
-  resize: vertical; /* User can resize vertically only */
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+body.dark-mode .popup-trigger-btn {
+  color: #141a15;
 }
 
-textarea:hover {
-  box-shadow: 0 0 5px #00004d inset; /* Matches your input hover effect */
+/* ---------- 10. SCROLL REVEAL ---------- */
+/* Elements with .reveal fade up when scrolled into view (JS adds .visible) */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-textarea:focus {
-  outline: 2px solid var(--color-green-dark);
-  outline-offset: 2px;
-  box-shadow: 0 0 5px rgba(87, 122, 48, 0.3);
+.reveal.visible {
+  opacity: 1;
+  transform: none;
 }
 
-/* Email input field styling */
-input[type="email"] {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border-secondary);
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  font-family: "Rubik", sans-serif;
-  font-size: 1rem;
-  background-color: var(--bg-secondary);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-input[type="email"]:hover {
-  box-shadow: 0 0 5px #00004d inset;
-}
-
-input[type="email"]:focus {
-  outline: 2px solid var(--color-green-dark);
-  outline-offset: 2px;
-  box-shadow: 0 0 5px rgba(87, 122, 48, 0.3);
-}
-
-/* Mobile responsive adjustments */
-@media screen and (max-width: 576px) {
-  .modal-content {
-    width: 95%; /* Wider on mobile */
-    margin: 10% auto; /* More margin from top on mobile */
-    padding: 1.5rem;
+/* Respect users who turn off animations in their OS settings */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  
-  .popup-trigger-btn {
-    bottom: 1rem; /* Closer to bottom on mobile */
-    right: 1rem; /* Closer to right on mobile */
-    padding: 0.75rem 1.25rem; /* Slightly smaller padding */
-    font-size: 0.9rem; /* Slightly smaller text */
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .slide {
+    transition: none;
+  }
+}
+
+/* ---------- 11. RESPONSIVE ---------- */
+@media (max-width: 760px) {
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .navbar-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+  }
+
+  .hero {
+    padding-top: 4.5rem;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* On phones, always show the photo above the text */
+  .row .col-media {
+    order: -1;
+    width: 100%;
   }
 }
